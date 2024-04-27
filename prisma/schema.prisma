@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  email            String   @unique
+  password         String
+  userName         String
+  companyName      String?
+  industryName     String?
+  employees        String?
+  confirmPassword  String?
+ 
+  createAt         DateTime? @default(now())
+  updateAt         DateTime? @updatedAt()
+}
+
+model PatientData {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  forename    String
+  surname     String
+  dob         String
+  sex         String
+  diagnoses   String
+  notes       String
+  phonenumber String
+<<<<<<< HEAD
+  status      String?
+=======
+>>>>>>> 40da47948ca580a34644e692d042d63459ffdadf
+}
+
+model appointmentData {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  patientsName       String
+  purpose            String
+  status             String
+  duration           String
+  type               String
+  onlineConsultation Boolean
+  selectedDate DateTime?  @default(now())
+  selectedTime DateTime?  @default(now())
+  room String?
+}
