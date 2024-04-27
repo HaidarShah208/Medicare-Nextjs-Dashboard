@@ -1,21 +1,12 @@
-'use client'
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { DASHBOARD, PATIENTS } from "@/app/constant/assets/allAssets";
 import AppoitmentsTimeline from "@/app/(components)/appoitmentsTimeline/AppoitmentsTimeline";
 import GraphData from "@/app/(components)/graphData/GraphData";
-import NewAppointment from "@/app/(components)/newAppointment/NewAppointment";
+import AppoitmentTiemlineHeader from "@/app/(components)/appoitmentTiemlineHeader/AppoitmentTiemlineHeader";
 
 export default function Dashboard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
   return (
     <>
       <p className="text-lg py-3 ps-2">Dashboad Summary</p>
@@ -94,22 +85,7 @@ export default function Dashboard() {
             </div>
         </div>
         <div className="w-[418px] mt-3 ms-3 px-4  py-2 bg-white">
-          <div className="flex justify-between">
-            <p className="text-base font-bold ">Upcomming Schedule</p>
-            <div className="flex">
-              <div className="">
-                <p>New appointment </p>
-              </div>
-              <div>
-                <Image onClick={openModal}
-                  src={PATIENTS.Add}
-                  alt="add"
-                  className="ms-2 w-[23px] h-[23px] cursor-pointer"
-                />
-              </div>
-            </div>
-            {isModalOpen && <NewAppointment onClose={closeModal} />} 
-          </div>
+          <AppoitmentTiemlineHeader/>
          <AppoitmentsTimeline/>
         </div>
       </div>

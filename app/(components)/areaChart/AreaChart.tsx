@@ -3,7 +3,7 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 interface Props {
-  appointmentsData: any[]; // assuming your appointment data is of type any[]
+  appointmentsData: any[];  
 }
 
 interface State {
@@ -34,7 +34,7 @@ class AreaChart extends React.Component<Props, State> {
         chart: {
           height: 350,
           type: 'area',
-          toolbar: {
+          toolbar : {
             show: false,
           },
         },

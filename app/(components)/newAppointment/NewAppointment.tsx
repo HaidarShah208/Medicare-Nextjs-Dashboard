@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import cross from "../../assets/Cross.svg";
 import user from "../../assets/User.svg";
@@ -69,7 +70,6 @@ function NewAppointment({ onClose }) {
     }
 
     try {
-    // Format time as "HH:mm:ss" for Prisma
     const selectedTime = new Date(selectedDate);
     selectedTime.setHours(selectedTime.getHours(), selectedTime.getMinutes(), 0, 0);
       const requestData = {

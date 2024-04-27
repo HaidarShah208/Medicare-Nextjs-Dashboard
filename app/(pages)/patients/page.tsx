@@ -1,8 +1,5 @@
 import PatientHeader from "@/app/(components)/patientHeader/PatientHeader";
 import PatientsTable from "@/app/(components)/patientsTable/PatientsTable";
-import { PATIENTS } from "@/app/constant/assets/allAssets";
-import Image from "next/image";
-import Link from "next/link";
 import React  from "react";
 
 interface Patient {

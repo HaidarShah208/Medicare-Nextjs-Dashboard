@@ -11,3 +11,13 @@ export type Users = {
       value: string;
     };
   };
+
+export type FormTypes= {
+  email: string;
+  password: string;
+  userName: string;
+  companyName: string;
+  industryName: string;
+  employees: string;
+  confirmPassword: string;
+}

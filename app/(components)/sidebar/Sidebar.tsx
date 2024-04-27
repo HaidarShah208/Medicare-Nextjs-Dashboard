@@ -48,13 +48,13 @@ function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
   return (
     <nav className={`absolute top-30 left-0 h-screen  bg-white w-[90px] sm:w-[245px] text-[#828282] z-50 border-e transition-transform transform ${sidebar ? 'translate-x-0' : '-translate-x-full z-50 md:translate-x-0'}`}>
       <p className='ps-6 pt-3 text-[12px] text-[#828282]'>MENU</p>
-   <Link href="/frontend/dashboard">
+   <Link href="/dashboard">
    <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Dashboard' && 'text-[#0000AC] border-s-4 border-[#0000AC]'}`} onClick={() => handleItemClick('Dashboard')}>
           <Image src={selectedItem === 'Dashboard' ? SIDEBAR.DashboardFocus : SIDEBAR.Dashboard} alt={'Dashboard'} />
           <span className="ml-4 font-medium hidden sm:block">Dashboard</span>
         </li>
       </Link>
-      <Link href="/frontend/schedule">
+      <Link href="/schedule">
         <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Schedule' && 'text-[#0000AC] border-s-4  border-[#0000AC]'}`} onClick={() => handleItemClick('Schedule')}>
           <Image src={selectedItem === 'Schedule' ? SIDEBAR.SchedualeFocus : SIDEBAR.Calender} alt={'Calender'} />
           <span className="ml-4 font-medium hidden sm:block">Schedule</span>
@@ -64,7 +64,7 @@ function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
       <Image src={SIDEBAR.Task} alt={'Task'}/>
         <span className="ml-4 font-medium hidden sm:block">Task</span>
       </li>
-   <Link href="/frontend/patients">
+   <Link href="/patients">
    <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Patients' && 'text-[#0000AC] border-s-4  border-[#0000AC]'}`} onClick={() => handleItemClick('Patients')}>
           <Image src={selectedItem === 'Patients' ? SIDEBAR.PetientFocus : SIDEBAR.Petient} alt={'Patients'} />
           <span className="ml-4 font-medium hidden sm:block">Patients</span>
@@ -82,7 +82,7 @@ function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
     <hr className="border-t  my-3 w-[168px]" />
 </div>
       <p className='ps-7 pt-3 text-[12px] text-[#828282]'>General</p>
-   <Link href="/frontend/setting">
+   <Link href="/setting">
    <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Setting' && 'text-[#0000AC] border-s-4  border-[#0000AC]'}`} onClick={() => handleItemClick('Setting')}>
           <Image src={selectedItem === 'Setting' ? SIDEBAR.SettingFocus : SIDEBAR.Setting} alt={'Setting'} />
           <span className="ml-4 font-medium hidden sm:block">Setting</span>

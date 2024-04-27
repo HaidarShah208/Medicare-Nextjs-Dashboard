@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import DemoComponent from "../datePicker/DatePicker";
+import Loader from "../loader/Loader";
 
 function AddPatient() {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ function AddPatient() {
       await dispatch(addPatient(requestData) as any);
       toast.success("Patient added successfully");
       setLoading(false);
+    router.push("/patients");
     } catch (error) {
       toast.error("Error in adding patient");
       console.error("Error submitting data:", error);
@@ -74,7 +76,7 @@ function AddPatient() {
   };
 
   const handleCancel = () => {
-    router.push("/frontend/patients");
+    router.push("/patients");
   };
   return (
     <div>
@@ -94,7 +96,7 @@ function AddPatient() {
               onClick={handleSubmit}
               className="ms-2 text-[18px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-              Save
+            {loading?<div className=' flex justify-center items-center'><Loader/></div>:"Save"}
             </button>
           </div>
         </div>

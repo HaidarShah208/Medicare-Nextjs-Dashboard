@@ -25,7 +25,7 @@ export default function PatientHeader() {
         )}
         </div>
         <div className="flex">
-          <Link href="/frontend/addPatients">
+          <Link href="/addPatients">
             <Image src={PATIENTS.Add} alt="add" className="me-2" />
           </Link>
           <Image src={PATIENTS.SearchPatient} onClick={handleSearchClick} alt="SearchPatient" />

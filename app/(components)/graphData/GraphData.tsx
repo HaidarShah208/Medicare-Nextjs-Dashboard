@@ -20,7 +20,7 @@ function GraphData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchPatients() as any);
+        await dispatch(fetchPatients(1) as any);
         await dispatch(getAppointments() as any);
         setLoading(false);
       } catch (error) {

@@ -15,7 +15,7 @@ const initialState:addPatients = {
 
 export const addPatient = createAsyncThunk(
   'signup/addPatient',
-  async (requestData) => {
+  async (requestData:any) => {
     const response = await instance.post("patients",requestData)
     
 

@@ -2,22 +2,13 @@
 import { useState } from 'react';
 import { PATIENTS, SCHEDUALE } from '@/app/constant/assets/allAssets';
 import Image from 'next/image';
-import NewAppointment from '../../../(components)/newAppointment/NewAppointment'; // Import the NewAppointment component
+import NewAppointment from '../../(components)/newAppointment/NewAppointment'; // Import the NewAppointment component
 import SchedulerCalender from '@/app/(components)/schedulerCalender/SchedulerCalender';
-import { useSelector } from 'react-redux';
+import useSchedule from './useSchedule';
 
 function Schedule() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const appointments = useSelector((state) => state.getAppointments.appointments);
-console.log('sheculedata',appointments)
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+const {closeModal,openModal,isModalOpen,appointments}=useSchedule()
   return (
     <>
       <p className='ps-3 mb-5 mt-2'>Schedule</p>

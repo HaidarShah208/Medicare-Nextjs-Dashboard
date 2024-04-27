@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import Loader from '../loader/Loader';
 
+
 function SignupForm() {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);

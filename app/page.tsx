@@ -1,5 +1,5 @@
 "use client"
-import Dashboard from './(pages)/frontend/dashboard/page'
+import Dashboard from './(pages)/dashboard/page'
 import { useEffect, useState } from 'react'
 import Header from './(components)/header/Header'
 import Sidebar from './(components)/sidebar/Sidebar'

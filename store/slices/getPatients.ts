@@ -6,7 +6,7 @@ import axios from 'axios';
 const initialState = {
   patients: [],
   loading: false,
-  error: null,
+  error: null as null | string,
 };
 
 export const fetchPatients = createAsyncThunk(
@@ -82,7 +82,7 @@ const patientsSlice = createSlice({
       })
       .addCase(fetchPatients.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message ?? 'Unknown error';
       })
       .addCase(deletePatients.fulfilled, (state, action) => {  
         state.loading = false;

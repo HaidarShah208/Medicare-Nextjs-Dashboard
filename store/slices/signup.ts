@@ -1,3 +1,4 @@
+import { FormTypes } from '@/app/constant/allTypes/AllTypes';
 import instance from '@/utils/instance';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -6,6 +7,8 @@ interface   signup {
   error: any;  
 }
 
+
+
 const initialState:signup = {
 loading: false,
 error: null,
@@ -13,7 +16,7 @@ error: null,
 
 export const signupUser = createAsyncThunk(
   'signup/signupUser',
-  async (formData) => {
+  async (formData:FormTypes) => {
     try {
       const response = await instance.post("signup", formData);
 
