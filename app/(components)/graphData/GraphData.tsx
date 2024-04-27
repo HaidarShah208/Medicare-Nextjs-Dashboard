@@ -61,7 +61,7 @@ function GraphData() {
         <div className="w-[358px] h-[191px] bg-white">
           <div className="flex justify-between px-4 pt-4">
             <p>Offline Consultations</p>
-            <Image src={PATIENTS.Options} alt="options" />
+            <Image src={PATIENTS.Options} alt="optionssss" />
           </div>
           <div className="flex justify-between px-4">
             <div className="flex flex-col">
