@@ -286,7 +286,7 @@ function NewAppointment({ onClose }) {
                   <div className="mt-4">
                   <button
                   className={`rounded-md py-1 bg-transparent outline-2 outline ${
-                    formData.onlineConsultation ? "outline-red-600 bg-gray-200 text-red-800" : "bg-red-700 text-white "
+                    formData.onlineConsultation ? "outline-red-600 bg-gray-200 text-red-800" : "bg-red-600 text-white "
                   }`}
                   onClick={() => handleChange("onlineConsultation", !formData.onlineConsultation)}
                 >

@@ -36,10 +36,7 @@ model PatientData {
   diagnoses   String
   notes       String
   phonenumber String
-<<<<<<< HEAD
   status      String?
-=======
->>>>>>> 40da47948ca580a34644e692d042d63459ffdadf
 }
 
 model appointmentData {
