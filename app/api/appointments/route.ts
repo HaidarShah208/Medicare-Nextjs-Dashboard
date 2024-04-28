@@ -1,10 +1,10 @@
 import { prisma } from "@/config/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { format } from "date-fns"
 
 export const POST = async (request: NextRequest) => {
     try {
-      const { patientsName, purpose,  status, duration, type, onlineConsultation,selectedDate, selectedTime,room} =
+      
+      const { patientsName, purpose,  status, duration, type, onlineConsultation,dateTime,room} =
         await request.json();
   
       if (!patientsName || !purpose || !status || !duration || !type) {
@@ -15,10 +15,10 @@ export const POST = async (request: NextRequest) => {
   
       try {
   
-        const formattedDate = new Date(selectedDate);  
-        const formattedTime = new Date(selectedTime);
-
-        const appointments = await prisma.appointmentData.create({
+        const today = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }); // Get current time in Pakistan standard time
+        const [hours, minutes, seconds] = today.split(':'); // Split the time string into hours, minutes, and seconds
+        const timeFormatted = `${hours}:${minutes}:${seconds}`; // Format the time as HH:mm:ss
+                const appointments = await prisma.appointmentData.create({
           data: {
             patientsName,
             purpose,
@@ -26,8 +26,8 @@ export const POST = async (request: NextRequest) => {
             duration,
             type,
             onlineConsultation,
-            selectedDate:formattedDate.toISOString(), // Store date as ISO string for Prisma
-            selectedTime:formattedTime.toISOString(),
+            dateTime ,
+            dateCreated:timeFormatted ,
             room
           },
         });

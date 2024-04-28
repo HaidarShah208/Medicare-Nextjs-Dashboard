@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { ChangeEvent, useState } from "react";
 import cross from "../../assets/Cross.svg";
 import user from "../../assets/User.svg";
 import location from "../../assets/Location.svg";
@@ -11,9 +11,10 @@ import { textColor } from "@/app/(pages)/layout";
 import { postAppointment } from "@/store/slices/addAppoitments";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
+import dayjs from "dayjs";
+import Loader from "../loader/Loader";
+
 interface FormData {
   patientsName: string;
   purpose: string;
@@ -21,18 +22,15 @@ interface FormData {
   duration: string | null;
   type: string | null;
   onlineConsultation: boolean;
-  selectedDate: string;  
-  selectedTime: string;
-  room :string
+  dateTime: Date;
+  room: string;
 }
 
 function NewAppointment({ onClose }) {
   const dispatch = useDispatch();
-  const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+  const [loading,setLoading]=useState(false)
   const [showRoomSelector, setShowRoomSelector] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(new Date());
-  const [selectedRoom, setSelectedRoom] = useState("Room 1")
+  const [selectedRoom, setSelectedRoom] = useState("Room 1");
   const [formData, setFormData] = useState<FormData>({
     patientsName: "",
     purpose: "",
@@ -40,10 +38,8 @@ function NewAppointment({ onClose }) {
     duration: "" || null,
     type: "" || null,
     onlineConsultation: true,
-    selectedDate: format(new Date(), "yyyy-MM-dd"),  
-    selectedTime: format(new Date(), "HH:mm"),
-    room:""
- 
+    dateTime: new Date(),
+    room: "",
   });
 
   const handleChange = (key: string, value: string | number | boolean) => {
@@ -53,7 +49,7 @@ function NewAppointment({ onClose }) {
       [key]: value,
     });
   };
-  const handleRoomChange = (room:any) => {
+  const handleRoomChange = (room: any) => {
     setSelectedRoom(room);
     setShowRoomSelector(false);
   };
@@ -70,15 +66,14 @@ function NewAppointment({ onClose }) {
     }
 
     try {
-    const selectedTime = new Date(selectedDate);
-    selectedTime.setHours(selectedTime.getHours(), selectedTime.getMinutes(), 0, 0);
+      setLoading(true)
       const requestData = {
         ...formData,
-        selectedTime: selectedTime.toISOString(), 
-        room: selectedRoom
-      }
+        room: selectedRoom,
+      };
       await dispatch(postAppointment(requestData) as any);
-    console.log("Form Data:", formData);
+      console.log("Form Data:", formData);
+      setLoading(false)
       onClose();
     } catch (error) {
       console.error("Error submitting appointment:", error);
@@ -89,14 +84,10 @@ function NewAppointment({ onClose }) {
     onClose();
   };
 
-  const handleDateTimeChange = (date: Date) => {
-    setSelectedDate(date);
-    setShowDateTimePicker(false);
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      selectedDate: format(date, "yyyy-MM-dd"),
-      selectedTime: format(date, "HH:mm"),
-    }));
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const dateTimeString = e.target.value;
+    const dateTime = new Date(dateTimeString);
+    setFormData((prevData) => ({ ...prevData, dateTime }));
   };
 
   return (
@@ -146,41 +137,58 @@ function NewAppointment({ onClose }) {
                     DATE AND TIME
                   </p>
 
-                  <p className="text-base py-2">{selectedDate.toLocaleDateString()}</p>
+                  <p className="text-base py-2">
+                    {" "}
+                    {dayjs(formData.dateTime).format("MM DD, YYYY")}
+                  </p>
 
-                  <p className="text-base font-bold"> {selectedTime.toLocaleTimeString()}</p>
+                  <p className="text-base font-bold">
+                    {" "}
+                    {dayjs(formData?.dateTime).format("HH:mm")}
+                  </p>
 
                   <p
-                    className={`text-sm cursor-pointer text-${textColor} pt-2`}
-                    onClick={() => setShowDateTimePicker(true)}
+                    className={`text-sm cursor-pointer text-blue-600  pt-2`}
                   >
                     change
                   </p>
 
-                  {showDateTimePicker && (
-                    <div className="absolute top-64 left-8 mt-4 w-full flex items-center justify-center">
-                      <DatePicker
-                        selected={selectedDate}
-                        onChange={handleDateTimeChange}
-                        showTimeSelect
-                        dateFormat="dd/MM/yyyy hh:mm"
-                        className="z-10 border bg-white"
-                      />
-                    </div>
-                  )}
+                  <input
+                    type="datetime-local"
+                    className="dateTimeInput"
+                    name="dateTime"
+                    onChange={handleDateChange}
+                    style={{
+                      width: "40px",
+                      position: "relative",
+                      bottom: "20px",
+                      opacity: 0,
+                    }}
+                  />
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   <Image src={location} alt="location" />
                   <p className={`text-lg text-${textColor} pt-3`}>LOCATION</p>
                   <p className="text-base py-2">General clinic</p>
                   <p className="text-base font-bold">{selectedRoom}</p>
-                  <p className={`text-sm text-${textColor} pt-2 cursor-pointer`}  onClick={() => setShowRoomSelector(true)} >change</p>
+                  <p
+                    className={`text-sm text-blue-600 pt-2 cursor-pointer`}
+                    onClick={() => setShowRoomSelector(true)}
+                  >
+                    change
+                  </p>
                   {showRoomSelector && (
                     <div className="absolute top-64 -left-6  mt-2 w-full flex items-center justify-end">
                       <div className="bg-white border rounded-md p-4">
                         <p className="text-lg font-bold">Choose Room</p>
                         <ul className="mt-2">
-                          {["Room 1", "Room 2", "Room 3", "Room 4", "Room 5"].map((room) => (
+                          {[
+                            "Room 1",
+                            "Room 2",
+                            "Room 3",
+                            "Room 4",
+                            "Room 5",
+                          ].map((room) => (
                             <li
                               key={room}
                               className="cursor-pointer py-2 px-4 hover:bg-gray-100"
@@ -284,12 +292,19 @@ function NewAppointment({ onClose }) {
                     </button>
                   </div>
                   <div className="mt-4">
-                  <button
-                  className={`rounded-md py-1 bg-transparent outline-2 outline ${
-                    formData.onlineConsultation ? "outline-red-600 bg-gray-200 text-red-800" : "bg-red-600 text-white "
-                  }`}
-                  onClick={() => handleChange("onlineConsultation", !formData.onlineConsultation)}
-                >
+                    <button
+                      className={`rounded-md py-1 bg-transparent outline-2 outline ${
+                        formData.onlineConsultation
+                          ? "outline-red-600 bg-gray-200 text-red-800"
+                          : "bg-red-600 text-white "
+                      }`}
+                      onClick={() =>
+                        handleChange(
+                          "onlineConsultation",
+                          !formData.onlineConsultation
+                        )
+                      }
+                    >
                       <div className="flex mx-2">
                         <Image
                           src={no}
@@ -320,7 +335,7 @@ function NewAppointment({ onClose }) {
               type="button"
               className="w-full inline-flex justify-center rounded-md  outline outline-2 outline-blue-800 shadow-sm px-4 py-2 hover:text-white bg-transparent text-base font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
             >
-              Save
+              {loading?<div className=' flex justify-center items-center'><Loader/></div>:'Save'}
             </button>
             <button
               onClick={handleSubmit}

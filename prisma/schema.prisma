@@ -14,21 +14,21 @@ datasource db {
 }
 
 model Users {
-  id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  email            String   @unique
-  password         String
-  userName         String
-  companyName      String?
-  industryName     String?
-  employees        String?
-  confirmPassword  String?
- 
-  createAt         DateTime? @default(now())
-  updateAt         DateTime? @updatedAt()
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  email           String  @unique
+  password        String
+  userName        String
+  companyName     String?
+  industryName    String?
+  employees       String?
+  confirmPassword String?
+
+  createAt DateTime? @default(now())
+  updateAt DateTime? @updatedAt()
 }
 
 model PatientData {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   forename    String
   surname     String
   dob         String
@@ -40,14 +40,14 @@ model PatientData {
 }
 
 model appointmentData {
-  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
   patientsName       String
   purpose            String
   status             String
   duration           String
   type               String
   onlineConsultation Boolean
-  selectedDate DateTime?  @default(now())
-  selectedTime DateTime?  @default(now())
-  room String?
+  dateTime           String?
+  dateCreated        String?
+  room               String?
 }
