@@ -69,6 +69,7 @@ function NewAppointment({ onClose }) {
       setLoading(true)
       const requestData = {
         ...formData,
+        dateCreated: new Date().toISOString(),
         room: selectedRoom,
       };
       await dispatch(postAppointment(requestData) as any);
