@@ -7,7 +7,8 @@ import { fetchPatients } from "@/store/slices/getPatients";
 import { getAppointments } from "@/store/slices/getAppoitments";
 import { IMEGES, PATIENTS } from "@/app/constant/assets/allAssets";
 import DonutChart from "../pieChart/PieChart";
-import ApexChart from "../areaChart/AreaChart";
+import OfflineChart from "../offlineAreaChart/OfflineAreaChart";
+import OnlineChart from "../onlineAreaChart/OnlineAreaChart";
 function GraphData() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -63,7 +64,14 @@ function GraphData() {
             <p>Offline Consultations</p>
             <Image src={PATIENTS.Options} alt="optionssss" />
           </div>
+          
           <div className="flex justify-between px-4">
+          {loading ? (
+              <div className="flex justify-center items-center w-full h-full">
+                <Loader />
+              </div>
+            ) : (
+              <>
             <div className="flex flex-col">
               <p className="text-[37px] pt-4 pb-2 font-bold">
                 {falseAppointments.length}
@@ -75,7 +83,9 @@ function GraphData() {
                 </p>
               </div>
             </div>
-            <ApexChart appointmentsData={falseAppointments.length} />
+            <OfflineChart/>
+            </>
+            )}
           </div>
         </div>
         <div className="w-[358px] h-[191px] bg-white mx-2">
@@ -84,16 +94,24 @@ function GraphData() {
             <Image src={PATIENTS.Options} alt="options" />
           </div>
           <div className="flex justify-between px-4">
+          {loading ? (
+              <div className="flex justify-center items-center w-full h-full">
+                <Loader />
+              </div>
+            ) : (
+              <>
             <div className="flex flex-col">
               <p className="text-[37px] pt-4 pb-2 font-bold">
                 {trueAppointments.length}
               </p>
               <div className="flex">
                 <Image src={IMEGES.Upred} alt="upred" />
-                <p className="text-base text-red-700 ps-2 font-bold">{trueAppointmentsPercentage}%</p>
+                <p className="text-base text-red-700 ps-2 font-bold">-{trueAppointmentsPercentage}%</p>
               </div>
             </div>
-            <ApexChart appointmentsData={trueAppointments.length} />
+            <OnlineChart/>
+            </>
+            )}
           </div>
         </div>
         <div className="w-[358px] h-[191px] bg-white">

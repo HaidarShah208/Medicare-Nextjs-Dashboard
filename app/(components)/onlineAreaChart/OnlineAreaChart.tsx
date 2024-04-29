@@ -15,7 +15,7 @@ interface State {
   options: ApexOptions;
 }
 
-const OfflineChart: React.FC<{}> = () => {
+const OnlineChart: React.FC<{}> = () => {
   const appointmentData: AppointmentDataType[] = useSelector(
     (state: RootState) => state.getAppointments.appointments
   );
@@ -28,7 +28,7 @@ const OfflineChart: React.FC<{}> = () => {
   
 
   const filteredAppointments = appointmentData.filter(
-    (appointment) => !appointment.onlineConsultation
+    (appointment) => appointment.onlineConsultation
   );
 
   const countAppointmentsByDay = (appointments: AppointmentDataType[]) => {
@@ -48,7 +48,7 @@ const OfflineChart: React.FC<{}> = () => {
   const initialState: State = {
     series: [
       {
-        name: "Offline Consultations",
+        name: "Oline Consultations",
         data: offlineChartData,
       },
     ],
@@ -97,4 +97,4 @@ const OfflineChart: React.FC<{}> = () => {
   );
 };
 
-export default OfflineChart;
+export default OnlineChart;
