@@ -11,11 +11,23 @@ const initialState:errHandle = {
   error:  null,
 };
 
+interface AppointmentData {
+  dateCreated: string;
+  room: string;
+  patientsName: string;
+  purpose: string;
+  status: string | null;
+  duration: string | null;
+  type: string | null;
+  onlineConsultation: boolean;
+  dateTime: Date;
+}
+
 export const postAppointment = createAsyncThunk(
   'appointments/postAppointment',
-  async (formData, { rejectWithValue }) => {
+  async (requestData: AppointmentData, { rejectWithValue }) => {
     try {
-      const response = await instance.post('appointments',formData)
+      const response = await instance.post('appointments',requestData)
       if (response.status !== 200) {
         throw new Error('Failed to submit appoitment');
       }

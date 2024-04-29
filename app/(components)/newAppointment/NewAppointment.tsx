@@ -26,7 +26,7 @@ interface FormData {
   room: string;
 }
 
-function NewAppointment({ onClose }) {
+function NewAppointment({ onClose }:any) {
   const dispatch = useDispatch();
   const [loading,setLoading]=useState(false)
   const [showRoomSelector, setShowRoomSelector] = useState(false);

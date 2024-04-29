@@ -14,24 +14,27 @@ function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
   const [selectedItem, setSelectedItem] =  useState<string>('Dashboard')
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const selectedItemParam = params.get('selectedItem');
-    const pathname = window.location.pathname;
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const selectedItemParam = params.get('selectedItem');
+      const pathname = window.location.pathname;
   
-    if (selectedItemParam) {
-      setSelectedItem(selectedItemParam);
-    } else {
-      if (pathname.includes('dashboard')) {
-        setSelectedItem('Dashboard');
-      } else if (pathname.includes('schedule')) {
-        setSelectedItem('Schedule');
-      } else if (pathname.includes('patients')) {
-        setSelectedItem('Patients');
-      } else if (pathname.includes('setting')) {
-        setSelectedItem('Setting');
+      if (selectedItemParam) {
+        setSelectedItem(selectedItemParam);
+      } else {
+        if (pathname.includes('dashboard')) {
+          setSelectedItem('Dashboard');
+        } else if (pathname.includes('schedule')) {
+          setSelectedItem('Schedule');
+        } else if (pathname.includes('patients')) {
+          setSelectedItem('Patients');
+        } else if (pathname.includes('setting')) {
+          setSelectedItem('Setting');
+        }
       }
     }
-  }, [window.location.search]);
+  }, [typeof window !== 'undefined' ? window.location.search : undefined]);
+  
 
   const handleItemClick = (itemName: string) => {
     setSelectedItem(itemName);

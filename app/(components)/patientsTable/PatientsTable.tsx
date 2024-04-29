@@ -8,7 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePatients, fetchPatients } from "@/store/slices/getPatients";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { COLORS } from "@/app/constant/color/Color";
+import { COLORS, GETSTATUSCOLOR, GetStatusTextColor } from "@/app/constant/color/Color";
+import { RootState } from "@/store/store";
+import { getAppointments } from "@/store/slices/getAppoitments";
+
+export interface AppointmentDataType {
+  dateTime: string;
+}
+
 
 const PatientsPerPage = 5;
 export default function PatientsTable() {
@@ -20,14 +27,29 @@ export default function PatientsTable() {
   const toggleMenu = (patientId: string) => {
     setShowMenu((prev) => (prev === patientId ? null : patientId));
   };
-  const patients = useSelector((state) => state.allPatients.patients);
-  const loading = useSelector((state) => state.allPatients.loading);
-
+  const patients = useSelector((state:RootState) => state.allPatients.patients);
+  const loading = useSelector((state:RootState) => state.allPatients.loading);
+  const appointmentData = useSelector(
+    (state: RootState) => state.getAppointments.appointments
+  );
+  
+  console.log('appointments', appointmentData)
+  
   useEffect(() => {
     fetchPatientsData(currentPage);
+    dispatch(getAppointments() as any);
   }, [currentPage, dispatch]);
+  
+  // const getDate = (patientId: string) => {
+  //   const appointment = appointmentData.find((appointment) => {
+  //     // Compare appointment data with patient data here
+  //     // Assuming patientId matches appointment patientId
+  //     return appointment.patientId === patientId;
+  //   });
 
-
+  //   return appointment ? appointment.dateTime : "";
+  // };
+  
 const fetchPatientsData = async (page:number) => {
   try {
     await dispatch(fetchPatients(page) as any);
@@ -46,7 +68,6 @@ console.log("fetch patient",fetchPatientsData)
       await dispatch(deletePatients(id) as any);
       toast.success("Patient deleted");
       await fetchPatientsData(currentPage);
-      // setShowMenu(null);
     } catch (error) {
       console.error("Error deleting patient:", error);
       toast.error("Failed to delete patient");
@@ -105,12 +126,13 @@ console.log("fetch patient",fetchPatientsData)
                         {patient.surname}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap  flex justify-center">
-                        <p className={`bg-${COLORS} mt-3 w-[140px] h-[25px] rounded-t-3xl rounded-b-3xl text-[12px] text-center pt-1 text-[#27AE60]`}>
-                          {patient.status}
+                        <p className={` mt-3 w-[140px] h-[25px] rounded-t-3xl rounded-b-3xl text-[12px] text-center pt-1 `} style={{ backgroundColor: GETSTATUSCOLOR(patient.status), color: GetStatusTextColor(patient.status) }}>
+                        {patient.status}
                         </p>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
-                        {patient.dob}
+                      {patient.dob}
+
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
                         Data 5

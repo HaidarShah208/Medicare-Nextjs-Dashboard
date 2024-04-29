@@ -9,13 +9,14 @@ import { IMEGES, PATIENTS } from "@/app/constant/assets/allAssets";
 import DonutChart from "../pieChart/PieChart";
 import OfflineChart from "../offlineAreaChart/OfflineAreaChart";
 import OnlineChart from "../onlineAreaChart/OnlineAreaChart";
+import { RootState } from "@/store/store";
 function GraphData() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   const patients = useSelector((state) => state.allPatients.patients);
   const appointments = useSelector(
-    (state) => state.getAppointments.appointments
+    (state:RootState) => state.getAppointments.appointments
   );
 
   useEffect(() => {

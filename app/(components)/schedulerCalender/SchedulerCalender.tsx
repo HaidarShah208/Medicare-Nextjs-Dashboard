@@ -12,7 +12,7 @@ const events = [
     end: new Date(2024, 3, 15) 
   },
   {
-    title: 'Appointment',
+    title: 'Appointments',
     start: new Date(2024, 3, 20), 
     end: new Date(2024, 3, 22) 
   }
