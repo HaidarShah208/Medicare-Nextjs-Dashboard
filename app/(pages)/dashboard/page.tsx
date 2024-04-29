@@ -12,7 +12,7 @@ export default function Dashboard() {
       <p className="text-lg py-3 ps-2">Dashboad Summary</p>
    <GraphData/>
       <div className="flex">
-        <div className=" mt-3 justify-center px-4  pt-4 w-[709px] bg-white">
+        {/* <div className=" mt-3 justify-center px-4  pt-4 w-[709px] bg-white">
           <div className="flex justify-between ">
             <p>Tasks</p>
             <div className="flex">
@@ -83,8 +83,8 @@ export default function Dashboard() {
               <p className="pe-2 text-[#0000AC] text-sm text-bold">view all</p>
               <Image src={DASHBOARD.RightArrow} alt="rightarrow"/>
             </div>
-        </div>
-        <div className="w-[418px] mt-3 ms-3 px-4  py-2 bg-white">
+        </div> */}
+        <div className="w-full mt-3 ms-1 px-4  py-2 bg-white">
           <AppoitmentTiemlineHeader/>
          <AppoitmentsTimeline/>
         </div>

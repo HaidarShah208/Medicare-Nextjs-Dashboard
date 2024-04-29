@@ -2,6 +2,7 @@ export type Users = {
     user: {
       email: string;
       name:string
+      
     };
   };
 
@@ -20,6 +21,13 @@ export type FormTypes= {
   industryName: string;
   employees: string;
   confirmPassword: string;
+}
+
+export type GetUserData= {
+  userName: string;
+  companyName: string;
+  industryName:string;
+  employees:string;
 }
 
 

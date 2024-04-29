@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { prisma } from "@/config/prisma";
-import toast from "react-hot-toast";
+import { getServerSession } from "next-auth";
+import { IncomingMessage } from "http";
 
 export const POST = async (request: NextRequest) => {
   try {
@@ -73,3 +74,43 @@ export const POST = async (request: NextRequest) => {
     });
   }
 };
+
+
+export async function GET(req: IncomingMessage): Promise<NextResponse> {
+  try {
+    const session = await getServerSession({ req });
+
+    console.log("session", session);
+
+    if (!session) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const userEmail = session.user?.email;
+
+    if (!userEmail) {
+      return new NextResponse("User email not found", { status: 400 });
+    }
+
+    const userData = await prisma.users.findFirst({
+      where: {
+        email: {
+          equals: userEmail,
+        },
+      },
+    });
+
+    if (!userData) {
+      return new NextResponse("User data not found", { status: 404 });
+    }
+
+    return new NextResponse(JSON.stringify(userData), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    console.error("Error:", err);
+    return new NextResponse("Internal Server Error", { status: 500 });
+  }
+}
+

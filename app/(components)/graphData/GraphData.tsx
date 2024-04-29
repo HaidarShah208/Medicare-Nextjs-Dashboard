@@ -33,7 +33,6 @@ function GraphData() {
     fetchData();
   }, [dispatch]);
 
-  console.log("allAppointments", appointments);
 
   const maleCount = patients.data
     ? patients.data.filter((patient: { sex: string }) => patient.sex === "male")

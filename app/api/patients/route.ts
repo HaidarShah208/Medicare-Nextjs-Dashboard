@@ -2,7 +2,6 @@ import { prisma } from "@/config/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 
-// Create new patients
 export const POST = async (request: NextRequest) => {
     try {
       const { forename, surname,  dob, sex, diagnoses, notes,phonenumber,status } =
