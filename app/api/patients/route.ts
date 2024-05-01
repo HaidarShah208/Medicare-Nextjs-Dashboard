@@ -68,13 +68,13 @@ export const POST = async (request: NextRequest) => {
     try {
       const { id, ...data } = await request.json();
   
-      const employee = await prisma.patientData.update({
+      const patients = await prisma.patientData.update({
         where: { id },
         data,
       });
   
-      console.log("Updated user:", employee);
-      return new NextResponse(JSON.stringify({ data: employee, success: true }), {
+      console.log("Updated user:", patients);
+      return new NextResponse(JSON.stringify({ data: patients, success: true }), {
         status: 200,
       });
     } catch (error) {
@@ -82,6 +82,9 @@ export const POST = async (request: NextRequest) => {
       return new NextResponse(JSON.stringify(error), { status: 400 });
     }
   };
+
+
+  
 
   export const DELETE = async (request: NextRequest) => {
     try {

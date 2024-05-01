@@ -33,14 +33,18 @@ export default function EditProfileForm() {
     fetchUserData();
   }, []);
 
+ 
+
   const handleEditProfile = () => {
-    setEditedData({
-      userName: userData.userName,
-      companyName: userData.companyName,
-      industryName: userData.industryName,
-      employees: userData.employees,
-    });
-    setShowModal(true);
+    if (userData) {
+      setEditedData({
+        userName: userData.userName,
+        companyName: userData.companyName,
+        industryName: userData.industryName,
+        employees: userData.employees,
+      });
+      setShowModal(true);
+    }
   };
 
   const handleCloseModal = () => {
@@ -75,6 +79,13 @@ export default function EditProfileForm() {
         toast.success("User profile updated successfully");
         setLoading(false);
         setShowModal(false);
+        setUserData((prevUserData) => ({
+          ...prevUserData,
+          userName: editedData.userName,
+          companyName: editedData.companyName,
+          industryName: editedData.industryName,
+          employees: editedData.employees,
+        }));
       } else {
         console.error("Failed to update user profile");
       }
@@ -88,6 +99,7 @@ export default function EditProfileForm() {
   }
 
   return (
+    
     <div className="w-[783px] h-[440px] pt-10 mt-5 bg-white">
       <div className="px-10 py-5 justify-between flex">
         <p className="text-[18px] text-blue-600 font-bold">Edit your profile</p>
@@ -151,17 +163,17 @@ export default function EditProfileForm() {
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3
-                      className="text-lg leading-6 font-medium text-gray-900"
+                      className="text-[18px] text-blue-600 font-bold"
                       id="modal-headline"
                     >
-                      Edit Profile
+                      Edit Your Profile
                     </h3>
                     <div className="mt-5">
                       <form>
                         <div className="mb-4">
                           <label
                             htmlFor="userName"
-                            className="block text-sm font-medium text-gray-700"
+                            className="block py-2 text-sm font-medium text-gray-700"
                           >
                             Name
                           </label>
@@ -172,13 +184,13 @@ export default function EditProfileForm() {
                             autoComplete="name"
                             value={editedData.userName}
                             onChange={handleInputChange}
-                            className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className="  block w-[400px] focus:outline-none shadow-sm sm:text-sm border-gray-400 rounded-md"
                           />
                         </div>
                         <div className="mb-4">
                           <label
                             htmlFor="companyName"
-                            className="block text-sm font-medium text-gray-700"
+                            className="block py-2 text-sm font-medium text-gray-700"
                           >
                             Company Name
                           </label>
@@ -189,13 +201,13 @@ export default function EditProfileForm() {
                             autoComplete="organization"
                             value={editedData.companyName}
                             onChange={handleInputChange}
-                            className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className=" focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
                         </div>
                         <div className="mb-4">
                           <label
                             htmlFor="industryName"
-                            className="block text-sm font-medium text-gray-700"
+                            className="block py-2 text-sm font-medium text-gray-700"
                           >
                             Industry Name
                           </label>
@@ -206,13 +218,13 @@ export default function EditProfileForm() {
                             autoComplete="industry"
                             value={editedData.industryName}
                             onChange={handleInputChange}
-                            className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className=" focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
                         </div>
                         <div className="mb-4">
                           <label
                             htmlFor="employees"
-                            className="block text-sm font-medium text-gray-700"
+                            className="block text-sm font-medium py-2 text-gray-700"
                           >
                             Employees
                           </label>
@@ -223,7 +235,7 @@ export default function EditProfileForm() {
                             autoComplete="employees"
                             value={editedData.employees}
                             onChange={handleInputChange}
-                            className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className="focus:outline-none  block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
                         </div>
                       </form>

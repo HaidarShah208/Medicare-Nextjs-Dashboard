@@ -8,7 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePatients, fetchPatients } from "@/store/slices/getPatients";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { COLORS, GETSTATUSCOLOR, GetStatusTextColor } from "@/app/constant/color/Color";
+import {
+  COLORS,
+  GETSTATUSCOLOR,
+  GetStatusTextColor,
+} from "@/app/constant/color/Color";
 import { RootState } from "@/store/store";
 import { getAppointments } from "@/store/slices/getAppoitments";
 
@@ -16,52 +20,36 @@ export interface AppointmentDataType {
   dateTime: string;
 }
 
-
 const PatientsPerPage = 5;
 export default function PatientsTable() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
   const [showMenu, setShowMenu] = useState<string | null>(null);
-  
+
   const toggleMenu = (patientId: string) => {
     setShowMenu((prev) => (prev === patientId ? null : patientId));
   };
-  const patients = useSelector((state:RootState) => state.allPatients.patients);
-  const loading = useSelector((state:RootState) => state.allPatients.loading);
-  const appointmentData = useSelector(
-    (state: RootState) => state.getAppointments.appointments
+  const patients = useSelector(
+    (state: RootState) => state.allPatients.patients
   );
-  
-  console.log('appointments', appointmentData)
-  
+  const loading = useSelector((state: RootState) => state.allPatients.loading);
+
   useEffect(() => {
     fetchPatientsData(currentPage);
-    dispatch(getAppointments() as any);
   }, [currentPage, dispatch]);
-  
-  // const getDate = (patientId: string) => {
-  //   const appointment = appointmentData.find((appointment) => {
-  //     // Compare appointment data with patient data here
-  //     // Assuming patientId matches appointment patientId
-  //     return appointment.patientId === patientId;
-  //   });
 
-  //   return appointment ? appointment.dateTime : "";
-  // };
-  
-const fetchPatientsData = async (page:number) => {
-  try {
-    await dispatch(fetchPatients(page) as any);
-  } catch (error) {
-    console.error('Error fetching patients:', error);
-   
-    toast.error("Failed to fetch patients");
-  }
-};
+  const fetchPatientsData = async (page: number) => {
+    try {
+      await dispatch(fetchPatients(page) as any);
+    } catch (error) {
+      console.error("Error fetching patients:", error);
 
-console.log("fetch patient",fetchPatientsData)
+      toast.error("Failed to fetch patients");
+    }
+  };
 
+  console.log("fetch patient", fetchPatientsData);
 
   const handleDelete = async (id: string) => {
     try {
@@ -80,7 +68,10 @@ console.log("fetch patient",fetchPatientsData)
 
   const indexOfLastPatient = currentPage * PatientsPerPage;
   const indexOfFirstPatient = indexOfLastPatient - PatientsPerPage;
-  const currentPatients = patients.data?.slice(indexOfFirstPatient, indexOfLastPatient); // Access data safely
+  const currentPatients = patients.data?.slice(
+    indexOfFirstPatient,
+    indexOfLastPatient
+  ); 
   return (
     <>
       <div className="mt-2  w-[1090px]">
@@ -114,66 +105,77 @@ console.log("fetch patient",fetchPatientsData)
                 </tr>
               </thead>
               <tbody className="divide-y ">
-              {currentPatients?.map((patient: any) => (
-                    <tr
-                      key={patient.id}
-                      className="bg-white h-[72px] justify-center"
-                    >
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
-                        {patient.forename}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
-                        {patient.surname}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap  flex justify-center">
-                        <p className={` mt-3 w-[140px] h-[25px] rounded-t-3xl rounded-b-3xl text-[12px] text-center pt-1 `} style={{ backgroundColor: GETSTATUSCOLOR(patient.status), color: GetStatusTextColor(patient.status) }}>
+                {currentPatients?.map((patient: any) => (
+                  <tr
+                    key={patient.id}
+                    className="bg-white h-[72px] justify-center"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {patient.forename}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {patient.surname}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap  flex justify-center">
+                      <p
+                        className={` mt-3 w-[140px] h-[25px] rounded-t-3xl rounded-b-3xl text-[12px] text-center pt-1 `}
+                        style={{
+                          backgroundColor: GETSTATUSCOLOR(patient.status),
+                          color: GetStatusTextColor(patient.status),
+                        }}
+                      >
                         {patient.status}
-                        </p>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                      </p>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
                       {patient.dob}
-
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
-                        Data 5
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
-                        <Image
-                          src={PATIENTS.Options}
-                          alt="option"
-                          className="relative inline-block object-cover object-center w-12 h-12 rounded-full cursor-pointer"
-                          data-popover-target="profile-menu"
-                          onClick={() => toggleMenu(patient.id)}
-                        />
-                        {showMenu === patient.id && (
-                          <ul
-                            role="menu"
-                            data-popover="profile-menu"
-                            data-popover-placement="bottom"
-                            className="absolute z-10 flex min-w-[90px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-1 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
-                          >
-                          
-                            <button
-                              onClick={() => {handleDelete(patient.id);
-                                setShowMenu(null);
-                              }}
-                              role="menuitem"
-                              className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-2 pt-2 pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-                            >
-                              <Image src={PATIENTS.Delete} alt="edit"/>
-                              <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
-                                Delete
-                              </p>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      Data 5
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <Image
+                        src={PATIENTS.Options}
+                        alt="option"
+                        className="relative inline-block object-cover object-center w-12 h-12 rounded-full cursor-pointer"
+                        data-popover-target="profile-menu"
+                        onClick={() => toggleMenu(patient.id)}
+                      />
+                      {showMenu === patient.id && (
+                        <ul
+                          role="menu"
+                          data-popover="profile-menu"
+                          data-popover-placement="bottom"
+                          className="absolute z-10 flex min-w-[90px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-1 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
+                        >
+                          <button  className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-2 pt-1  text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                            <Image src={PATIENTS.Edit} alt="edit"/>
+                            <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+                            Edit
+                            </p>
                             </button>
-                          </ul>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                          <button
+                            onClick={() => {
+                              handleDelete(patient.id);
+                              setShowMenu(null);
+                            }}
+                            role="menuitem"
+                            className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-2 pt-1 pb-1 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                          >
+                            <Image src={PATIENTS.Delete} alt="delete" />
+                            <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+                              Delete
+                            </p>
+                          </button>
+                        </ul>
+                      )}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <div className="flex justify-end me-4 my-3">
-            <Pagination
+              <Pagination
                 currentPage={currentPage}
                 patientsPerPage={PatientsPerPage}
                 totalPatients={patients.data?.length || 0}

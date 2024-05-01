@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import Loader from '../loader/Loader';
+import AuthFormButton from '../authFormButton/AuthFormButton';
 
 
 function SignupForm() {
@@ -156,12 +157,7 @@ function SignupForm() {
       />
     </div>
     <div className="mb-6">
-      <button
-        type="submit"
-        className="bg-[#0000AC] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
-      >
-        {loading?<div className=' flex justify-center items-center'><Loader/></div>:'Finish'}
-      </button>
+   <AuthFormButton isLoading={loading}/>
     </div>
   </form>
   )

@@ -3,11 +3,13 @@ import { Change, Users } from '@/app/constant/allTypes/AllTypes';
 import { getSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
+import AuthFormButton from '../authFormButton/AuthFormButton';
 
 
 export default function ChangePasswordForm() {
   
   const [user, setUser] = useState<Users | null>(null);
+  const [loading,setLoading]=useState(false)
  
   useEffect(() => {
     const fetchUser = async () => {
@@ -44,7 +46,8 @@ export default function ChangePasswordForm() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/changePassword", {
+      setLoading(true)
+      const response = await fetch("/api/changePassword", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -59,6 +62,7 @@ export default function ChangePasswordForm() {
         throw new Error("Failed to change password.");
       }
       console.log("Password changed successfully.");
+      setLoading(false)
       toast.success("Password changed successfully")
       window.history.back();
     } catch (error) {
@@ -109,12 +113,7 @@ export default function ChangePasswordForm() {
         />
       </div>
       <div className="mb-6">
-        <button
-          type="submit"
-          className="bg-[#0000AC] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
-        >
-          Finish
-        </button>
+        <AuthFormButton isLoading={loading}/>
       </div>
     </form>
   )

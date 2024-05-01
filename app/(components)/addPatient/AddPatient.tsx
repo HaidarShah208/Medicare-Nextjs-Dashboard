@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import DemoComponent from "../datePicker/DatePicker";
 import Loader from "../loader/Loader";
+import FormButton from "../formButton/FormButton";
 
 function AddPatient() {
   const dispatch = useDispatch();
@@ -78,6 +79,8 @@ function AddPatient() {
   const handleCancel = () => {
     router.push("/patients");
   };
+
+  
   return (
     <div>
       <div className="items-center flex flex-col">
@@ -92,12 +95,7 @@ function AddPatient() {
             >
               Cancel
             </button>
-            <button
-              onClick={handleSubmit}
-              className="ms-2 text-[18px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-            {loading?<div className=' flex justify-center items-center'><Loader/></div>:"Save"}
-            </button>
+            <FormButton onClick={handleSubmit} text="Save" loading={loading}/>
           </div>
         </div>
         <div className="w-[783px] h-[790px] pt-10 mt-5 bg-white">
