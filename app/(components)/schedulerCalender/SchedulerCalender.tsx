@@ -18,17 +18,17 @@ const CalendarChart = ({appointments}:any) => {
   }));
  
   const CustomEvent = ({ event }:any) => (
-    <div>
+    <div className="bg-gray-700 p-2 rounded shadow-md">
       <strong>{event.title}</strong>
       <div className='flex'><Image src={SCHEDUALE.UserOutlined} alt='UserOutlined' className='me-1'/> {event.appointmentData.patientsName}</div>
-      <div className='flex'><Image src={SCHEDUALE.Document} alt='Document' className='me-1'/> Medical document</div>
+      <div className='flex'><Image src={SCHEDUALE.Document} alt='DocumentIcon' className='me-1'/> Medical document</div>
       <div className='flex'><Image src={SCHEDUALE.Locator} alt='Locator' className='me-1'/> {event.appointmentData.duration} minutes</div>
       <div className='flex'><Image src={SCHEDUALE.Clock} alt='Clock' className='me-1'/> {event.appointmentData.room}</div>
     </div>
   );
 
   return (
-    <div style={{ height: '680px' }}>
+    <div style={{ height: '770px' }}>
       <Calendar
         localizer={localizer}
         
