@@ -1,18 +1,15 @@
-'use client'
-import { signIn } from 'next-auth/react';
-import React, { useState } from 'react'
-import toast from 'react-hot-toast';
-import Loader from '../loader/Loader';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import AuthFormButton from '../authFormButton/AuthFormButton';
+"use client";
+import { signIn } from "next-auth/react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import Loader from "../loader/Loader";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import AuthFormButton from "../authFormButton/AuthFormButton";
+import AuthFormInput from "../authFormInput/AuthFormInput";
+import { Change } from "@/app/constant/allTypes/AllTypes";
 
-type Change = {
-  target: {
-    name: string;
-    value: string;
-  };
-};
+
 
 function LoginForm() {
   const router = useRouter();
@@ -52,55 +49,34 @@ function LoginForm() {
     }
   };
 
-  
-
   return (
-       <form className="w-full max-w-sm mt-7" onSubmit={handleSubmit}>
-            <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="block text-gray-700 text-[16px] font-bold mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={handleChange}
-                className="appearance-none border-b-2  bg-[#F7F7F7] border-gray-300 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-800"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="password"
-                className="block text-gray-700 text-[16px] font-bold mb-2"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={handleChange}
-                className="appearance-none border-b-2  bg-[#F7F7F7] border-gray-300 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-800"
-                placeholder="Enter your password"
-              />
-            </div>
-            <p className="text-gray-700 text-end mb-4 text-sm ms-60">
-          <Link
-            href="/forgotPassword"
-            className="text-[#0000AC] font-bold"
-          >
-            Lost your password ?
-          </Link>
-        </p>
-            <div className="mb-6">
-              <AuthFormButton isLoading={isLoading}/>
-            </div>
-          </form>
-  )
+    <form className="w-full max-w-sm mt-7" onSubmit={handleSubmit}>
+      <AuthFormInput
+        label="Email"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+
+      <AuthFormInput
+        label="Password"
+        name="password"
+        type="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+
+      <p className="text-gray-700 text-end mb-4 text-sm ms-60">
+        <Link href="/forgotPassword" className="text-[#0000AC] font-bold">
+          Lost your password ?
+        </Link>
+      </p>
+      <div className="mb-6">
+        <AuthFormButton isLoading={isLoading} />
+      </div>
+    </form>
+  );
 }
 
-export default LoginForm
+export default LoginForm;

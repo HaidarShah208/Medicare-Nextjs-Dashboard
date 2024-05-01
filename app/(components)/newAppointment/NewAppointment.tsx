@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
 import Loader from "../loader/Loader";
+import FormButton from "../formButton/FormButton";
 
 interface FormData {
   patientsName: string;
@@ -331,13 +332,7 @@ function NewAppointment({ onClose }:any) {
             </div>
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button
-              onClick={handleSubmit}
-              type="button"
-              className="w-full inline-flex justify-center rounded-md  outline outline-2 outline-blue-800 shadow-sm px-4 py-2 hover:text-white bg-transparent text-base font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-            >
-              {loading?<div className=' flex justify-center items-center'><Loader/></div>:'Save'}
-            </button>
+           <FormButton onClick={handleSubmit} text="Save" loading={loading}/>
             <button
               onClick={handleSubmit}
               type="button"

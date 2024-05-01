@@ -30,4 +30,14 @@ export type GetUserData= {
   employees:string;
 }
 
+export type InputProps= {
+  label: string;
+  name: string;
+  type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+
+ 
 

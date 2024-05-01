@@ -4,6 +4,7 @@ import { getSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import AuthFormButton from '../authFormButton/AuthFormButton';
+import AuthFormInput from '../authFormInput/AuthFormInput';
 
 
 export default function ChangePasswordForm() {
@@ -73,45 +74,27 @@ export default function ChangePasswordForm() {
 
   return (
     <form className="w-full max-w-sm mt-7" onSubmit={handleSubmit}>
-      <div className="mb-6">
-        <label htmlFor="oldPassword" className="block text-gray-700 text-[16px] font-bold mb-2">
-          Old Password
-        </label>
-        <input
-          type="password"
-          name="oldPassword"
-          value={formData.oldPassword}
-          onChange={handleChange}
-          className="appearance-none border-b-2  bg-[#F7F7F7] border-gray-300 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-800"
-          placeholder="Old Password"
-        />
-      </div>
-      <div className="mb-6">
-        <label htmlFor="newPassword" className="block text-gray-700 text-[16px] font-bold mb-2">
-          New Password
-        </label>
-        <input
-          type="password"
-          name="newPassword"
-          value={formData.newPassword}
-          onChange={handleChange}
-          className="appearance-none border-b-2  bg-[#F7F7F7] border-gray-300 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-800"
-          placeholder="New Password"
-        />
-      </div>
-      <div className="mb-6">
-        <label htmlFor="confirmPassword" className="block text-gray-700 text-[16px] font-bold mb-2">
-          Confirm Password
-        </label>
-        <input
-          type="password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          className="appearance-none border-b-2  bg-[#F7F7F7] border-gray-300 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-gray-800"
-          placeholder="Confirm Password"
-        />
-      </div>
+        <AuthFormInput
+        label="Old Password"
+        name="oldPassword"
+        type="password"
+        value={formData.oldPassword}
+        onChange={handleChange}
+      />
+       <AuthFormInput
+        label="New Password"
+        name="newPassword"
+        type="password"
+        value={formData.newPassword}
+        onChange={handleChange}
+      />
+       <AuthFormInput
+        label="Confirm Password"
+        name="confirmPassword"
+        type="password"
+        value={formData.confirmPassword}
+        onChange={handleChange}
+      />
       <div className="mb-6">
         <AuthFormButton isLoading={loading}/>
       </div>

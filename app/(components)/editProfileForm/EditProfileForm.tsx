@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Loader from "../loader/Loader";
 import { GetUserData } from "@/app/constant/allTypes/AllTypes";
 import toast from "react-hot-toast";
+import FormButton from "../formButton/FormButton";
+import ProfileFormInput from "../profileFormInput/ProfileFormInput";
 
 export default function EditProfileForm() {
   const [userData, setUserData] = useState<GetUserData | null>(null);
@@ -33,8 +35,6 @@ export default function EditProfileForm() {
     fetchUserData();
   }, []);
 
- 
-
   const handleEditProfile = () => {
     if (userData) {
       setEditedData({
@@ -51,7 +51,7 @@ export default function EditProfileForm() {
     setShowModal(false);
   };
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEditedData((prevData) => ({
       ...prevData,
@@ -99,7 +99,6 @@ export default function EditProfileForm() {
   }
 
   return (
-    
     <div className="w-[783px] h-[440px] pt-10 mt-5 bg-white">
       <div className="px-10 py-5 justify-between flex">
         <p className="text-[18px] text-blue-600 font-bold">Edit your profile</p>
@@ -170,93 +169,41 @@ export default function EditProfileForm() {
                     </h3>
                     <div className="mt-5">
                       <form>
-                        <div className="mb-4">
-                          <label
-                            htmlFor="userName"
-                            className="block py-2 text-sm font-medium text-gray-700"
-                          >
-                            Name
-                          </label>
-                          <input
-                            type="text"
-                            name="userName"
-                            id="userName"
-                            autoComplete="name"
-                            value={editedData.userName}
-                            onChange={handleInputChange}
-                            className="  block w-[400px] focus:outline-none shadow-sm sm:text-sm border-gray-400 rounded-md"
-                          />
-                        </div>
-                        <div className="mb-4">
-                          <label
-                            htmlFor="companyName"
-                            className="block py-2 text-sm font-medium text-gray-700"
-                          >
-                            Company Name
-                          </label>
-                          <input
-                            type="text"
-                            name="companyName"
-                            id="companyName"
-                            autoComplete="organization"
-                            value={editedData.companyName}
-                            onChange={handleInputChange}
-                            className=" focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                          />
-                        </div>
-                        <div className="mb-4">
-                          <label
-                            htmlFor="industryName"
-                            className="block py-2 text-sm font-medium text-gray-700"
-                          >
-                            Industry Name
-                          </label>
-                          <input
-                            type="text"
-                            name="industryName"
-                            id="industryName"
-                            autoComplete="industry"
-                            value={editedData.industryName}
-                            onChange={handleInputChange}
-                            className=" focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                          />
-                        </div>
-                        <div className="mb-4">
-                          <label
-                            htmlFor="employees"
-                            className="block text-sm font-medium py-2 text-gray-700"
-                          >
-                            Employees
-                          </label>
-                          <input
-                            type="text"
-                            name="employees"
-                            id="employees"
-                            autoComplete="employees"
-                            value={editedData.employees}
-                            onChange={handleInputChange}
-                            className="focus:outline-none  block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                          />
-                        </div>
+                        <ProfileFormInput
+                          label="Name"
+                          name="userName"
+                          value={editedData.userName}
+                          onChange={handleInputChange}
+                        />
+                        <ProfileFormInput
+                          label="Company Name"
+                          name="companyName"
+                          value={editedData.companyName}
+                          onChange={handleInputChange}
+                        />
+                        <ProfileFormInput
+                          label="Industry Name"
+                          name="industryName"
+                          value={editedData.industryName}
+                          onChange={handleInputChange}
+                        />
+                        <ProfileFormInput
+                          label="Employees"
+                          name="employees"
+                          value={editedData.employees}
+                          onChange={handleInputChange}
+                        />
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
+                <FormButton
                   onClick={handleSaveChanges}
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                  {loading ? (
-                    <div className=" flex justify-center items-center">
-                      <Loader />
-                    </div>
-                  ) : (
-                    "Save"
-                  )}
-                </button>
+                  text={"Save"}
+                  loading={loading}
+                />
                 <button
                   onClick={handleCloseModal}
                   type="button"
