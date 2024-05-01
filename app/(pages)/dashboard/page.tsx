@@ -9,7 +9,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <p className="text-lg py-3 ps-2">Dashboad Summary</p>
+      <p className="text-lg py-3 ps-2">Dashboad &gt; Summary</p>
    <GraphData/>
       <div className="flex">
         {/* <div className=" mt-3 justify-center px-4  pt-4 w-[709px] bg-white">

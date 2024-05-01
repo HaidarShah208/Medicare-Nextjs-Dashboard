@@ -1,5 +1,4 @@
 'use client'
-import { useState } from 'react';
 import { PATIENTS, SCHEDUALE } from '@/app/constant/assets/allAssets';
 import Image from 'next/image';
 import NewAppointment from '../../(components)/newAppointment/NewAppointment'; // Import the NewAppointment component
@@ -22,7 +21,7 @@ const {closeModal,openModal,isModalOpen,appointments}=useSchedule()
         </div>
       </div>
       {isModalOpen && <NewAppointment onClose={closeModal} />}  
-      <div className='mt-5'>
+      <div className='mt-5 mb-10'>
         <SchedulerCalender appointments={appointments}/>
       </div>
     </>

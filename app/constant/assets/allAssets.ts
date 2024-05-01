@@ -88,7 +88,15 @@ export const  DASHBOARD = {
 }
 
 import Print from '../../assets/Print.svg'
+import Locator from '../../assets/Locator.svg'
+import Clock from '../../assets/Clock.svg'
+import UserOutlined from '../../assets/UserOutlined.svg'
+import Document from '../../assets/Document.svg'
 
 export const  SCHEDUALE = {
-    Print:Print
+    Print:Print,
+    Locator:Locator,
+    Clock:Clock,
+    UserOutlined:UserOutlined,
+    Document:Document
 }
