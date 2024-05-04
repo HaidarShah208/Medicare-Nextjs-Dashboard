@@ -1,4 +1,4 @@
-import ChangePasswordForm from '@/app/(components)/changePasswordForm/page'
+import ChangePasswordForm from '@/app/(components)/changePasswordForm/ChangePasswordForm'
 import { IMEGES } from '@/app/constant/assets/allAssets'
 import Image from 'next/image'
 import React from 'react'
