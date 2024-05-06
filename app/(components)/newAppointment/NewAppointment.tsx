@@ -13,19 +13,10 @@ import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
-import Loader from "../loader/Loader";
 import FormButton from "../formButton/FormButton";
+import { FormData } from "@/app/constant/allTypes/AllTypes";
 
-interface FormData {
-  patientsName: string;
-  purpose: string;
-  status: string | null;
-  duration: string | null;
-  type: string | null;
-  onlineConsultation: boolean;
-  dateTime: Date;
-  room: string;
-}
+
 
 function NewAppointment({ onClose }:any) {
   const dispatch = useDispatch();
@@ -104,7 +95,7 @@ function NewAppointment({ onClose }:any) {
         >
           &#8203;
         </span>
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-[700px]">
+        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-[650px]">
           <div className="sm:flex sm:items-start">
             <div className=" w-full text-center sm:mt-0 sm:text-left">
               <div className="flex items-center justify-between px-6 h-[62px] bg-blue-600">

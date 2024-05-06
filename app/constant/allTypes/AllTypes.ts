@@ -39,5 +39,21 @@ export type InputProps= {
 }
 
 
+export type  FormData= {
+  patientsName: string;
+  purpose: string;
+  status: string | null;
+  duration: string | null;
+  type: string | null;
+  onlineConsultation: boolean;
+  dateTime: Date;
+  room: string;
+}
+
  
+export type patientInformation= {
+  patientsName: string;
+  purpose: string;
+  duration: string;
+}
 

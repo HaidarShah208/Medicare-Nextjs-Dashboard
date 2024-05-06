@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
  interface AppointmentDataType {
   consultation: string;
   dateTime: string;
-  patientName: string;
+  patientsName: string;
   
 }
 
@@ -28,7 +28,7 @@ const dispatch = useDispatch()
         const minutesDifference = Math.floor(timeDifference / (1000 * 60));
 
         if (minutesDifference === 30 || minutesDifference === 10 || minutesDifference === 5) {
-          showToast(`Your appointment with${appointment.patientName} is in ${minutesDifference} minutes.`);
+          showToast(`Your appointment with ${appointment.patientsName} is in ${minutesDifference} minutes.`);
         }
       });
     };
