@@ -52,8 +52,37 @@ export type  FormData= {
 
  
 export type patientInformation= {
+  id(id: any): void;
   patientsName: string;
   purpose: string;
   duration: string;
 }
 
+
+export type AppointmentData= {
+  id:string,
+  dateCreated: string;
+  room: string;
+  patientsName: string;
+  purpose: string;
+  status: string | null;
+  duration: string | null;
+  type: string | null;
+  onlineConsultation: boolean;
+  dateTime: Date;
+}
+
+
+export type errHandle={
+  loading:boolean;
+      error:any;
+  
+  }
+
+export type   AppointmentTypes= {
+  patientName: string;
+  dateTime: string;
+  duration: string;
+  purpose: string;
+  id: string;
+}

@@ -1,16 +1,20 @@
 "use client";
-import { patientInformation } from "@/app/constant/allTypes/AllTypes";
+import { AppointmentTypes, patientInformation } from "@/app/constant/allTypes/AllTypes";
 import { DASHBOARD, PATIENTS } from "@/app/constant/assets/allAssets";
 import { getAppointments } from "@/store/slices/getAppoitments";
 import { RootState } from "@/store/store";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 
 
 function AppointmentsTimeline() {
   const [showDetails, setShowDetails] = useState(false);
+  const [editAppointmentData, setEditAppointmentData] =
+  useState<AppointmentTypes | null>(null);
+  // const [deletedAppointmentId, setDeletedAppointmentId] = useState<number | null>(null);
 
   const handleClick = () => {
     setShowDetails(!showDetails);
@@ -20,10 +24,39 @@ function AppointmentsTimeline() {
     (state: RootState) => state.getAppointments.appointments
   );
   const dispatch = useDispatch();
+ 
 
   useEffect(() => {
     dispatch(getAppointments() as any);
   }, [dispatch]);
+
+
+
+  //handle delete
+  const handleDelete = async (id: string) => {
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        id: id,
+      });
+
+      const requestOptions = {
+        method: "DELETE",
+        headers: myHeaders,
+        body: raw,
+      };
+
+      await fetch("/api/appointments", requestOptions);
+      toast.success("success Appointment SuccessFully Deleted");
+    } catch (error) {
+      toast.error("An error occurred while deleting the appointment");
+    }
+  };
+  
+  // handle edit
+
 
   const today = new Date();
   const timeSlot = [
@@ -79,7 +112,6 @@ function AppointmentsTimeline() {
                           </div>
                           <p className="ps-2">{slot}</p>
                           <p className="ps-3">{appointment.patientsName}</p>
-                          <p className="ps-3">{appointment.duration}</p>
                         </div>
                         <div className="flex ">
                           <p className="pe-3 text-sm text-[#828282]">
@@ -91,22 +123,22 @@ function AppointmentsTimeline() {
                       {showDetails && (
                         <div className="border py-3 rounded-lg mt-2">
                           <div className="flex">
-                            <p className="text-bold text-[#1D1D1D]  me-3 ms-2">
-                              Patient
+                            <p className="font-bold text-[#1D1D1D]  me-3 ms-2">
+                              Patient:
                             </p>
                             <p className="text-sm">
                               {appointment.patientsName}
                             </p>
                           </div>
                           <div className="flex my-2">
-                            <p className="text-bold text-[#1D1D1D]  me-3 ms-2">
-                              Time
+                            <p className="font-bold text-[#1D1D1D]  me-3 ms-2">
+                              Duration:
                             </p>
-                            <p className="text-sm">{appointment.duration}</p>
+                            <p className="text-sm">{appointment.duration} min</p>
                           </div>
                           <div className="flex">
-                            <p className="text-bold text-[#1D1D1D]  me-3 ms-2">
-                              Purpose
+                            <p className="font-bold text-[#1D1D1D]  me-3 ms-2">
+                              Purpose:
                             </p>
                             <p className="text-sm">{appointment.purpose}</p>
                           </div>
@@ -117,6 +149,9 @@ function AppointmentsTimeline() {
                                 src={PATIENTS.Delete}
                                 className=" w-6"
                                 alt="delete"
+                                onClick={() => {
+                                  handleDelete(String(appointment.id));  
+                                }}
                               />
                               <Image
                                 src={DASHBOARD.User}

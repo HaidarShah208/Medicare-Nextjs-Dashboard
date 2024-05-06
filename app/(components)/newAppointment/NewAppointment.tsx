@@ -1,7 +1,7 @@
 "use client";
 import React, { ChangeEvent, useState } from "react";
 import cross from "../../assets/Cross.svg";
-import user from "../../assets/User.svg";
+import user from "../../assets/UserOutlined.svg";
 import location from "../../assets/Location.svg";
 import time from "../../assets/Time.svg";
 import no from "../../assets/No.svg";
@@ -289,7 +289,7 @@ function NewAppointment({ onClose }:any) {
                       className={`rounded-md py-1 bg-transparent outline-2 outline ${
                         formData.onlineConsultation
                           ? "outline-red-600 bg-gray-200 text-red-800"
-                          : "bg-red-600 text-white "
+                          : "bg-red-500 text-white "
                       }`}
                       onClick={() =>
                         handleChange(

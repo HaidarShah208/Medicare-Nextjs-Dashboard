@@ -71,3 +71,27 @@ export const POST = async (request: NextRequest) => {
       return new NextResponse(JSON.stringify(error), { status: 400 });
     }
   };
+
+
+  export const DELETE = async (req: NextRequest) => {
+  try {
+    const body = await req.json();
+    if (body.id) {
+      await prisma.appointmentData.delete({
+        where: {
+          id: body.id,
+        },
+      });
+      return NextResponse.json({ message: "Appoitment deleted successfully " });
+    }
+
+    return NextResponse.json({
+      message: "All params required",
+    });
+  } catch (error) {
+    return NextResponse.json({
+      message: "something went wrong during deleting appointment",
+      error: JSON.stringify(error),
+    });
+  }
+};

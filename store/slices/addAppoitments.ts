@@ -1,27 +1,14 @@
+import { AppointmentData, errHandle } from '@/app/constant/allTypes/AllTypes';
 import instance from '@/utils/instance';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-interface errHandle{
-loading:boolean;
-    error:any;
 
-}
 const initialState:errHandle = {
   loading: false,
   error:  null,
 };
 
-interface AppointmentData {
-  dateCreated: string;
-  room: string;
-  patientsName: string;
-  purpose: string;
-  status: string | null;
-  duration: string | null;
-  type: string | null;
-  onlineConsultation: boolean;
-  dateTime: Date;
-}
+
 
 export const postAppointment = createAsyncThunk(
   'appointments/postAppointment',
@@ -38,6 +25,9 @@ export const postAppointment = createAsyncThunk(
     }
   }
 );
+
+
+
 
 const appointmentSlice = createSlice({
   name: 'appointments',
