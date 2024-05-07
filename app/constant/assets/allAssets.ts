@@ -100,3 +100,21 @@ export const  SCHEDUALE = {
     UserOutlined:UserOutlined,
     Document:Document
 }
+
+
+import UserIcon from '../../assets/userIcon.svg'
+import Cross from "../../assets/Cross.svg";
+import Location from "../../assets/Location.svg";
+import Time from "../../assets/Time.svg";
+import No from "../../assets/No.svg";
+import Notify from "../../assets/Notify.svg";
+
+export const  APPOITMENTS = {
+    UserIcon:UserIcon,
+    Cross:Cross,
+    Location:Location,
+    Time:Time,
+    No:No,
+    Notify:Notify
+
+}

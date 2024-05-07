@@ -27,13 +27,13 @@ const dispatch = useDispatch()
         const timeDifference = appointmentTime - now;
         const minutesDifference = Math.floor(timeDifference / (1000 * 60));
 
-        if (minutesDifference === 30 || minutesDifference === 10 || minutesDifference === 5) {
+        if (minutesDifference === 30 || minutesDifference === 10 || minutesDifference === 4) {
           showToast(`Your appointment with ${appointment.patientsName} is in ${minutesDifference} minutes.`);
         }
       });
     };
 
-    const interval = setInterval(checkAppointmentTime, 60000); 
+    const interval = setInterval(checkAppointmentTime, 70000); 
 
     return () => clearInterval(interval);
   }, [appointments]);
@@ -42,5 +42,5 @@ const dispatch = useDispatch()
 }
 
 function showToast(message:any) {
-  toast.info(message);
+  toast.error(message);
 }

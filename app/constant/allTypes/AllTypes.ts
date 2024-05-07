@@ -52,7 +52,7 @@ export type  FormData= {
 
  
 export type patientInformation= {
-  id(id: any): void;
+  id:string;
   patientsName: string;
   purpose: string;
   duration: string;

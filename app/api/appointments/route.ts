@@ -82,7 +82,9 @@ export const POST = async (request: NextRequest) => {
           id: body.id,
         },
       });
-      return NextResponse.json({ message: "Appoitment deleted successfully " });
+      const appointments = await prisma.appointmentData.findMany();
+
+     return NextResponse.json({ data: appointments, message: "Appointment deleted successfully" });
     }
 
     return NextResponse.json({
@@ -93,5 +95,23 @@ export const POST = async (request: NextRequest) => {
       message: "something went wrong during deleting appointment",
       error: JSON.stringify(error),
     });
+  }
+};
+
+
+export const PUT = async (request: NextRequest) => {
+  try {
+    const { id, ...data } = await request.json();
+    const appointment = await prisma.appointmentData.update({
+      where: { id },
+      data,
+    });
+    console.log("Updated appoitment information:", appointment);
+    return new NextResponse(JSON.stringify({ data: appointment, success: true }), {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error during updating appoitment:", error);
+    return new NextResponse(JSON.stringify(error), { status: 400 });
   }
 };

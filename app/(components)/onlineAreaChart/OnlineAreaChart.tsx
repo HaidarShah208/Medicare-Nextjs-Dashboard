@@ -48,7 +48,7 @@ const OnlineChart: React.FC<{}> = () => {
   const initialState: State = {
     series: [
       {
-        name: "Oline Consultations",
+        name: "Online Consultations",
         data: offlineChartData,
       },
     ],

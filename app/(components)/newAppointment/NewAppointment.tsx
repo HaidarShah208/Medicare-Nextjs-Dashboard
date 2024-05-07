@@ -1,11 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
-import cross from "../../assets/Cross.svg";
-import user from "../../assets/UserOutlined.svg";
-import location from "../../assets/Location.svg";
-import time from "../../assets/Time.svg";
-import no from "../../assets/No.svg";
-import notify from "../../assets/Notify.svg";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { textColor } from "@/app/(pages)/layout";
 import { postAppointment } from "@/store/slices/addAppoitments";
@@ -14,24 +8,27 @@ import toast from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
 import FormButton from "../formButton/FormButton";
-import { FormData } from "@/app/constant/allTypes/AllTypes";
+import { FormData, Users } from "@/app/constant/allTypes/AllTypes";
+import { APPOITMENTS } from "@/app/constant/assets/allAssets";
+import { getSession } from "next-auth/react";
 
 
 
-function NewAppointment({ onClose }:any) {
+function NewAppointment({ onClose,appointmentData }:any) {
   const dispatch = useDispatch();
   const [loading,setLoading]=useState(false)
   const [showRoomSelector, setShowRoomSelector] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState("Room 1");
+  const [user, setUser] = useState<Users | null>(null);
   const [formData, setFormData] = useState<FormData>({
-    patientsName: "",
-    purpose: "",
-    status: "" || null,
-    duration: "" || null,
-    type: "" || null,
-    onlineConsultation: true,
-    dateTime: new Date(),
-    room: "",
+    patientsName: appointmentData.patientsName,
+    purpose: appointmentData.purpose,
+    status: appointmentData.status,
+    duration: appointmentData.duration,
+    type: appointmentData.type,
+    onlineConsultation: appointmentData.onlineConsultation,
+    dateTime: appointmentData.dateTime,
+    room: appointmentData.room,
   });
 
   const handleChange = (key: string, value: string | number | boolean) => {
@@ -45,6 +42,15 @@ function NewAppointment({ onClose }:any) {
     setSelectedRoom(room);
     setShowRoomSelector(false);
   };
+
+ 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await getSession();
+      setUser(userData as Users);
+    };
+    fetchUser();
+  }, []);
   const handleSubmit = async () => {
     if (
       !formData.patientsName ||
@@ -103,49 +109,37 @@ function NewAppointment({ onClose }:any) {
                   Add New Entry
                 </h3>
                 <Image
-                  src={cross}
+                  src={APPOITMENTS.Cross}
                   alt="cross"
                   className="cursor-pointer"
                   onClick={handleCancel}
                 />
               </div>
 
-              <div className="grid grid-cols-1 items-center justify-center mt-10 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 items-center justify-center sm:grid-cols-3 gap-4">
                 <div className="flex flex-col items-center justify-center">
-                  <Image src={user} alt="user" />
-
+                  <Image src={APPOITMENTS.UserIcon} alt="user" />
                   <p className={`text-lg text-${textColor} pt-3`}>
                     PRACTITIONAR
                   </p>
-
-                  <p className="text-base py-2">John Doe</p>
-
+                  <p className="text-base py-2">{user?.user.name}</p>
                   <p className="text-base font-bold"> Jeneral Docator</p>
                 </div>
-
-                <div className="flex flex-col items-center justify-center">
-                  <Image src={time} alt="time" />
-
+                <div className="flex flex-col mt-10 items-center justify-center">
+                  <Image src={APPOITMENTS.Time} alt="time" />
                   <p className={`text-lg text-${textColor} pt-3`}>
                     DATE AND TIME
                   </p>
-
                   <p className="text-base py-2">
-                    {" "}
                     {dayjs(formData.dateTime).format("MM DD, YYYY")}
                   </p>
-
                   <p className="text-base font-bold">
-                    {" "}
                     {dayjs(formData?.dateTime).format("HH:mm")}
                   </p>
-
                   <p
-                    className={`text-sm cursor-pointer text-blue-600  pt-2`}
-                  >
+                    className={`text-sm cursor-pointer text-blue-600  pt-1`}>
                     change
                   </p>
-
                   <input
                     type="datetime-local"
                     className="dateTimeInput"
@@ -159,8 +153,8 @@ function NewAppointment({ onClose }:any) {
                     }}
                   />
                 </div>
-                <div className="flex flex-col items-center justify-center">
-                  <Image src={location} alt="location" />
+                <div className="flex flex-col items-center mt-2 justify-center">
+                  <Image src={APPOITMENTS.Location} alt="location" />
                   <p className={`text-lg text-${textColor} pt-3`}>LOCATION</p>
                   <p className="text-base py-2">General clinic</p>
                   <p className="text-base font-bold">{selectedRoom}</p>
@@ -300,7 +294,7 @@ function NewAppointment({ onClose }:any) {
                     >
                       <div className="flex mx-2">
                         <Image
-                          src={no}
+                          src={APPOITMENTS.No}
                           className="w-[32px] me-2 h-[32px]"
                           alt="no"
                         />
@@ -312,7 +306,7 @@ function NewAppointment({ onClose }:any) {
               </div>
               <div className="my-14 px-6">
                 <div className="flex">
-                  <Image src={notify} alt="notify" />
+                  <Image src={APPOITMENTS.Notify} alt="notify" />
                   <p className="text-lg font-bold ps-2">Send notifications</p>
                 </div>
                 <p className="text-base mt-1">

@@ -7,24 +7,22 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import NewAppointment from "../newAppointment/NewAppointment";
 
 
 
 function AppointmentsTimeline() {
-  const [showDetails, setShowDetails] = useState(false);
-  const [editAppointmentData, setEditAppointmentData] =
-  useState<AppointmentTypes | null>(null);
-  // const [deletedAppointmentId, setDeletedAppointmentId] = useState<number | null>(null);
-
-  const handleClick = () => {
-    setShowDetails(!showDetails);
-  };
-
-  const appointmentData: patientInformation[] = useSelector(
-    (state: RootState) => state.getAppointments.appointments
-  );
   const dispatch = useDispatch();
- 
+  const [showDetailsMap, setShowDetailsMap] = useState<{ [id: string]: boolean }>({});
+  const [editAppointmentData, setEditAppointmentData] = useState<AppointmentTypes | null>(null);
+  const appointmentData: patientInformation[] = useSelector((state: RootState) => state.getAppointments.appointments);
+  
+  const handleClick = (id: string) => {
+    setShowDetailsMap(prevState => ({
+      ...prevState,
+      [id]: !prevState[id]  
+    }));
+  };
 
   useEffect(() => {
     dispatch(getAppointments() as any);
@@ -50,13 +48,18 @@ function AppointmentsTimeline() {
 
       await fetch("/api/appointments", requestOptions);
       toast.success("success Appointment SuccessFully Deleted");
+      setShowDetailsMap({});
     } catch (error) {
       toast.error("An error occurred while deleting the appointment");
     }
   };
   
   // handle edit
-
+  const handleEdit = (appointment: React.SetStateAction<AppointmentTypes | null>) => {
+    console.log("Editing appointment:", appointment);
+    setEditAppointmentData(appointment);
+    setShowDetailsMap({});
+  };
 
   const today = new Date();
   const timeSlot = [
@@ -103,12 +106,12 @@ function AppointmentsTimeline() {
                   {appointmentsInSlot.map((appointment, idx) => (
                     <div key={idx} className="flex flex-col  mt-8  ">
                       <div
-                        className="flex cursor-pointer rounded-md border px-2 py-3 justify-between"
-                        onClick={handleClick}
+                        className="flex cursor-pointer rounded-lg border px-2 py-2 justify-between"
+                        onClick={() => handleClick(appointment.id)}
                       >
                         <div className="flex  ">
                           <div className="pt-2">
-                            <div className="circle w-2 h-2 bg-gray-500 rounded-full"></div>
+                            <div className="circle w-2 h-2 bg-blue-500 rounded-full"></div>
                           </div>
                           <p className="ps-2">{slot}</p>
                           <p className="ps-3">{appointment.patientsName}</p>
@@ -120,7 +123,7 @@ function AppointmentsTimeline() {
                           <Image src={DASHBOARD.UpArrow} alt="uparrow" />
                         </div>
                       </div>
-                      {showDetails && (
+                      {showDetailsMap[appointment.id] && (
                         <div className="border py-3 rounded-lg mt-2">
                           <div className="flex">
                             <p className="font-bold text-[#1D1D1D]  me-3 ms-2">
@@ -147,7 +150,7 @@ function AppointmentsTimeline() {
                             <div className="flex">
                               <Image
                                 src={PATIENTS.Delete}
-                                className=" w-6"
+                                className="cursor-pointer w-6"
                                 alt="delete"
                                 onClick={() => {
                                   handleDelete(String(appointment.id));  
@@ -160,8 +163,9 @@ function AppointmentsTimeline() {
                               />
                               <Image
                                 src={PATIENTS.Edit}
-                                className=" w-6"
+                                className="cursor-pointer w-6"
                                 alt="edit"
+                                onClick={() => handleEdit(appointment)}
                               />
                             </div>
                             <button
@@ -181,6 +185,12 @@ function AppointmentsTimeline() {
           );
         })}
       </div>
+      {editAppointmentData && (
+        <NewAppointment
+          onClose={() => setEditAppointmentData(null)}
+          appointmentData={editAppointmentData}
+        />
+      )}
     </div>
   );
 }
