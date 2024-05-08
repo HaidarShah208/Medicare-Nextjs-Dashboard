@@ -1,5 +1,6 @@
 import instance from '@/utils/instance';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 interface ForgotPasswordState {
   loading: boolean;
@@ -13,16 +14,18 @@ const initialState: ForgotPasswordState = {
 
 export const forgotPassword = createAsyncThunk(
   'auth/forgotPassword',
-  async (email: string) => {
+  async ({ email, newPassword }: { email: string, newPassword: string }) => {
     try {
-      const response = await instance.post("forgotPassword", { email });
+      const response = await instance.put("forgotPassword", { email,newPassword });
 
       if (response.status !== 200) {
+        toast.error("error:"+response.status)
         throw new Error('Forgot password request failed');
       }
-
+      toast.success("Password changed successfully.");
       return response.data;
-    } catch (error) {
+    } catch (error:any) {
+      toast.error("Error in forgot password request:  "+error.message);
       throw new Error('Error in forgot password request');
     }
   }

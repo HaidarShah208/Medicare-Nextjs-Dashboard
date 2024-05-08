@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import NewAppointment from "../newAppointment/NewAppointment";
 
 
-
 function AppointmentsTimeline() {
   const dispatch = useDispatch();
   const [showDetailsMap, setShowDetailsMap] = useState<{ [id: string]: boolean }>({});
@@ -28,9 +27,6 @@ function AppointmentsTimeline() {
     dispatch(getAppointments() as any);
   }, [dispatch]);
 
-
-
-  //handle delete
   const handleDelete = async (id: string) => {
     try {
       const myHeaders = new Headers();
@@ -54,7 +50,6 @@ function AppointmentsTimeline() {
     }
   };
   
-  // handle edit
   const handleEdit = (appointment: React.SetStateAction<AppointmentTypes | null>) => {
     console.log("Editing appointment:", appointment);
     setEditAppointmentData(appointment);

@@ -1,38 +1,74 @@
 'use client'
 import Loader from '@/app/(components)/loader/Loader';
 import { IMEGES } from '@/app/constant/assets/allAssets'
-import { forgotPassword } from '@/store/slices/forgotPassword';
+import axios from 'axios';
 import Image from 'next/image'
-import React, { useState } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function ForgotPassword() {
-  const dispatch = useDispatch();
+  const router = useRouter();
+  const { loading, error } = useSelector((state:any) => state.forgotPassword); 
   const [formData, setFormData] = useState({
     email: '',
   });
 
-  const { loading, error } = useSelector((state) => state.forgotPassword); // Get loading and error states from the store
-
+  const otp = Math.floor(100000 + Math.random() * 900000);
   const handleInputChange = (e:any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     if (!formData.email) {
       toast.error("Please enter email.");
       return;
     }
-    dispatch(forgotPassword(formData.email) as any); // Dispatch forgotPassword action with the email
+
+    const data = {
+      service_id: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+      template_id: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
+      user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_ID || "",
+      template_params: {
+        to_email: formData.email,
+        to_name: formData.email,
+        from_name: "Medicare",
+        user_email: formData.email,
+        otp: otp,
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "https://api.emailjs.com/api/v1.0/email/send",
+        data
+      );
+      localStorage.setItem(
+        "otpData",
+        JSON.stringify({ email: formData.email, otp })
+      );
+      router.push("/otp");
+      console.log(res.data);
+    } catch (error) {
+      console.log("error", error);
+    }
   };
+
+  useEffect(() => {
+    setTimeout(function () {
+      localStorage.removeItem("otpData");
+    }, 60 * 1000);
+  }, [otp]);
+
+
   return (
     <div className='flex justify-center items-center h-screen '>
     <div className=''>
   <div className="flex flex-col justify-center sm:w-[544px]  w-[300px] items-center mt-7">
-    <p className={`text-[38px]`}>Get your new password</p>
+    <p className={`text-[38px] my-5` }>Enter your email</p>
     <form className="w-full max-w-sm  mt-7" onSubmit={handleSubmit}>
     
       <div className="mb-6">

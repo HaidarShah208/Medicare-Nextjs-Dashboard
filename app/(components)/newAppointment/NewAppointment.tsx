@@ -12,8 +12,6 @@ import { FormData, Users } from "@/app/constant/allTypes/AllTypes";
 import { APPOITMENTS } from "@/app/constant/assets/allAssets";
 import { getSession } from "next-auth/react";
 
-
-
 function NewAppointment({ onClose,appointmentData }:any) {
   const dispatch = useDispatch();
   const [loading,setLoading]=useState(false)
@@ -21,15 +19,16 @@ function NewAppointment({ onClose,appointmentData }:any) {
   const [selectedRoom, setSelectedRoom] = useState("Room 1");
   const [user, setUser] = useState<Users | null>(null);
   const [formData, setFormData] = useState<FormData>({
-    patientsName: appointmentData.patientsName,
-    purpose: appointmentData.purpose,
-    status: appointmentData.status,
-    duration: appointmentData.duration,
-    type: appointmentData.type,
-    onlineConsultation: appointmentData.onlineConsultation,
-    dateTime: appointmentData.dateTime,
-    room: appointmentData.room,
+    patientsName: "",
+    purpose: "",
+    status: "" || null,
+    duration: "" || null,
+    type: "" || null,
+    onlineConsultation: true,
+    dateTime: new Date(),
+    room: "",
   });
+
 
   const handleChange = (key: string, value: string | number | boolean) => {
     setFormData({
@@ -51,6 +50,22 @@ function NewAppointment({ onClose,appointmentData }:any) {
     };
     fetchUser();
   }, []);
+
+useEffect(() => {
+    if ( appointmentData) {
+      setFormData({
+        patientsName: appointmentData.patientsName,
+        purpose: appointmentData.purpose,
+        status: appointmentData.status,
+        duration: appointmentData.duration,
+        type: appointmentData.type,
+        onlineConsultation: appointmentData.onlineConsultation,
+        dateTime: appointmentData.dateTime,
+        room: appointmentData.room,
+      });
+    }
+  }, [ appointmentData]);
+
   const handleSubmit = async () => {
     if (
       !formData.patientsName ||
@@ -70,9 +85,33 @@ function NewAppointment({ onClose,appointmentData }:any) {
         dateCreated: new Date().toISOString(),
         room: selectedRoom,
       };
-      await dispatch(postAppointment(requestData) as any);
+      if (appointmentData) {
+        try {
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+  
+          const raw = JSON.stringify({
+            id: appointmentData.id,
+            ...requestData,  
+          });
+  
+          const requestOptions = {
+            method: "PUT",
+            headers: myHeaders,
+            body: raw,
+          };
+  
+          await fetch(`http://localhost:3000/api/appointments`, requestOptions);
+          toast.success("Successfully Updated");
+        } catch (error) {
+          console.log("error", error);
+        }
+      } else {
+        await dispatch(postAppointment(requestData) as any);
+      }
+      
       console.log("Form Data:", formData);
-      setLoading(false)
+      setLoading(false);
       onClose();
     } catch (error) {
       console.error("Error submitting appointment:", error);
@@ -317,7 +356,7 @@ function NewAppointment({ onClose,appointmentData }:any) {
             </div>
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-           <FormButton onClick={handleSubmit} text="Save" loading={loading}/>
+           <FormButton onClick={handleSubmit} text={appointmentData?'update':'save'} loading={loading}/>
             <button
               onClick={handleSubmit}
               type="button"

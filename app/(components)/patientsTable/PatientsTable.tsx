@@ -8,13 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePatients, fetchPatients } from "@/store/slices/getPatients";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import {
-  COLORS,
-  GETSTATUSCOLOR,
-  GetStatusTextColor,
-} from "@/app/constant/color/Color";
+import {  GETSTATUSCOLOR,GetStatusTextColor} from "@/app/constant/color/Color";
 import { RootState } from "@/store/store";
-import { getAppointments } from "@/store/slices/getAppoitments";
 
 export interface AppointmentDataType {
   dateTime: string;
@@ -27,18 +22,19 @@ export default function PatientsTable() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState<string | null>(null);
 
-  const toggleMenu = (patientId: string) => {
-    setShowMenu((prev) => (prev === patientId ? null : patientId));
-  };
   const patients = useSelector(
     (state: RootState) => state.allPatients.patients
   );
   const loading = useSelector((state: RootState) => state.allPatients.loading);
-
+  
   useEffect(() => {
     fetchPatientsData(currentPage);
   }, [currentPage, dispatch]);
-
+  
+  const toggleMenu = (patientId: string) => {
+    setShowMenu((prev) => (prev === patientId ? null : patientId));
+  };
+  
   const fetchPatientsData = async (page: number) => {
     try {
       await dispatch(fetchPatients(page) as any);
@@ -66,6 +62,9 @@ export default function PatientsTable() {
     setCurrentPage(pageNumber);
   };
 
+
+  const handleEdit=( )=>{
+  }
   const indexOfLastPatient = currentPage * PatientsPerPage;
   const indexOfFirstPatient = indexOfLastPatient - PatientsPerPage;
   const currentPatients = patients.data?.slice(

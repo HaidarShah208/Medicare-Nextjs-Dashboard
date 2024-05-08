@@ -106,12 +106,12 @@ export const PUT = async (request: NextRequest) => {
       where: { id },
       data,
     });
-    console.log("Updated appoitment information:", appointment);
+    console.log("Updated appointment information:", appointment);
     return new NextResponse(JSON.stringify({ data: appointment, success: true }), {
       status: 200,
     });
   } catch (error) {
-    console.error("Error during updating appoitment:", error);
+    console.error("Error during updating appointment:", error);
     return new NextResponse(JSON.stringify(error), { status: 400 });
   }
 };

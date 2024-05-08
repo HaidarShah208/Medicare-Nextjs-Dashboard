@@ -1,4 +1,3 @@
-// slices/changePassword.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const changePassword = createAsyncThunk<void, { email: string, oldPassword: string, newPassword: string }>(
