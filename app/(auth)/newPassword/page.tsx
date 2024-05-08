@@ -34,7 +34,7 @@ export default function NewPassword() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!formData.newPassword) {
-      toast.error("Please enter otp.");
+      toast.error("Please enter password.");
       return;
     }
     try {

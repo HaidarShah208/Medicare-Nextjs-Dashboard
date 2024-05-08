@@ -25,7 +25,6 @@ function LoginForm() {
     }
     try {
       setIsLoading(true);
-      console.log("Submitting with state:", formData);
       const user = await signIn("credentials", {
         ...formData,
         redirect: false,
