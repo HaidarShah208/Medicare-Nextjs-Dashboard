@@ -35,7 +35,7 @@ export default function ForgotPassword() {
       template_params: {
         to_email: formData.email,
         to_name: formData.email,
-        from_name: "Medicare",
+        from_name: "Medicare app",
         user_email: formData.email,
         otp: otp,
       },

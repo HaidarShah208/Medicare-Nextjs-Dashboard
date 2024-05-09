@@ -1,4 +1,3 @@
-'use client'
 import { PATIENTS, SCHEDUALE } from '@/app/constant/assets/allAssets';
 import Image from 'next/image';
 import NewAppointment from '../../(components)/newAppointment/NewAppointment'; // Import the NewAppointment component

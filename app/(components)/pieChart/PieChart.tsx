@@ -2,16 +2,14 @@
 
 import React, { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
-interface DonutChartProps {
-  series: number[];
-}
+ 
 
 interface DonutChartProps {
   maleCount: number;
   femaleCount: number;
 }
 
-const DonutChart: React.FC<DonutChartProps> = ({ maleCount, femaleCount }) => {
+const PieChart: React.FC<DonutChartProps> = ({ maleCount, femaleCount }) => {
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -79,4 +77,4 @@ const DonutChart: React.FC<DonutChartProps> = ({ maleCount, femaleCount }) => {
   );
 };
 
-export default DonutChart;
+export default PieChart;

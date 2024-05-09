@@ -52,7 +52,7 @@ function Otp() {
     <div className='flex justify-center items-center h-screen '>
     <div className=''>
   <div className="flex flex-col justify-center sm:w-[544px]  w-[300px] items-center mt-7">
-    <p className={`text-[38px]`}>Get your otp</p>
+    <p className={`text-[38px]`}>Write your otp</p>
     <form className="w-full max-w-sm  mt-7" onSubmit={handleSubmit}>
     
       <div className="mb-6">

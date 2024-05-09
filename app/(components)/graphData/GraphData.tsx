@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPatients } from "@/store/slices/getPatients";
 import { getAppointments } from "@/store/slices/getAppoitments";
 import { IMEGES, PATIENTS } from "@/app/constant/assets/allAssets";
-import DonutChart from "../pieChart/PieChart";
+ 
 import OfflineChart from "../offlineAreaChart/OfflineAreaChart";
 import OnlineChart from "../onlineAreaChart/OnlineAreaChart";
 import { RootState } from "@/store/store";
+import PieChart from "../pieChart/PieChart";
 function GraphData() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -134,7 +135,7 @@ function GraphData() {
                   Female {femaleCount}
                   </p>
                 </div>
-                <DonutChart maleCount={maleCount} femaleCount={femaleCount} />
+              <PieChart maleCount={maleCount} femaleCount={femaleCount}/>
               </>
             )}
           </div>

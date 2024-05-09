@@ -2,7 +2,6 @@
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import Loader from "../loader/Loader";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthFormButton from "../authFormButton/AuthFormButton";
