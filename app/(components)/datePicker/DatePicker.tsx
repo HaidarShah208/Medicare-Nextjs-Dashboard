@@ -45,7 +45,7 @@ interface IOptions {
   };
 }
 
-const options: Partial<IOptions> = {
+const options: IOptions = {
   title: "Demo Title",
   autoHide: true,
   todayBtn: false,
