@@ -147,12 +147,12 @@ export default function PatientsTable() {
                           data-popover-placement="bottom"
                           className="absolute z-10 flex min-w-[90px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-1 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
                         >
-                          <button  className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-2 pt-1  text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                          {/* <button  className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-2 pt-1  text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                             <Image src={PATIENTS.Edit} alt="edit"/>
                             <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
                             Edit
                             </p>
-                            </button>
+                            </button> */}
                           <button
                             onClick={() => {
                               handleDelete(patient.id);

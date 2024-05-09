@@ -2,49 +2,50 @@ import React, { useState } from 'react';
 import DatePicker from 'tailwind-datepicker-react';
 
 interface DemoComponentProps {
-  onDateChange: (date: Date) => void; // Define the onDateChange prop
+  onDateChange: (date: Date) => void;  
 }
 
+interface ITheme {
+  background: string;
+  todayBtn: string;
+  clearBtn: string;
+  icons: string;
+  text: string;
+  disabledText: string;
+  input: string;
+  inputIcon: string;
+  selected: string;
+}
 
-interface DatepickerOptions {
-  title: string;
-  autoHide: boolean;
-  todayBtn: boolean;
-  clearBtn: boolean;
-  clearBtnText: string;
-  maxDate: Date;
-  minDate: Date;
-  theme: {
-    background: string;
-    todayBtn: string;
-    clearBtn: string;
-    icons: string;
-    text: string;
-    disabledText: string;
-    input: string;
-    inputIcon: string;
-    selected: string;
-  };
-  icons: {
+interface IOptions {
+  title?: string;
+  autoHide?: boolean;
+  todayBtn?: boolean;
+  clearBtn?: boolean;
+  clearBtnText?: string;
+  maxDate?: Date;
+  minDate?: Date;
+  theme?: ITheme;
+  icons?: {
     prev: () => JSX.Element;
     next: () => JSX.Element;
   };
-  datepickerClassNames: string;
-  defaultDate: Date;
-  language: string;
-  disabledDates: Date[];
-  weekDays: string[];
-  inputNameProp: string;
-  inputIdProp: string;
-  inputPlaceholderProp: string;
-  inputDateFormatProp: {
-    day: string;
-    month: string;
-    year: string;
+  datepickerClassNames?: string;
+  defaultDate?: Date;
+  language?: string;
+  disabledDates?: Date[];
+  weekDays?: string[];
+  inputNameProp?: string;
+  inputIdProp?: string;
+  inputPlaceholderProp?: string;
+  inputDateFormatProp?: {
+    day?: string;
+    month?: string;
+    year?: string;
   };
 }
 
-const options: DatepickerOptions = {
+const options: Partial<IOptions> = {
   title: "Demo Title",
   autoHide: true,
   todayBtn: false,
@@ -82,7 +83,7 @@ const options: DatepickerOptions = {
   }
 };
 
-const DemoComponent: React.FC<DemoComponentProps> = ({onDateChange}:any) => {
+const DemoComponent: React.FC<DemoComponentProps> = ({ onDateChange }: any) => {
   const [show, setShow] = useState<boolean>(false);
   
   const handleChange = (selectedDate: Date) => {
@@ -95,7 +96,7 @@ const DemoComponent: React.FC<DemoComponentProps> = ({onDateChange}:any) => {
 
   return (
     <div>
-      <DatePicker options={options} onChange={handleChange} classNames='w-[415px] mb-0' show={show} setShow={handleClose} />
+      <DatePicker options={options} onChange={handleChange} classNames='w-[415px] ' show={show} setShow={handleClose} />
     </div>
   );
 };
