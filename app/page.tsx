@@ -3,7 +3,6 @@ import Dashboard from './(pages)/dashboard/page'
 import { useEffect, useState } from 'react'
 import Header from './(components)/header/Header'
 import Sidebar from './(components)/sidebar/Sidebar'
-import Signup from './(auth)/signup/page'
 
 export default function Page() {
   const [sidebar, setSidebar] = useState<boolean>(true);  

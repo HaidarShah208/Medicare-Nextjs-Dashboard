@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { prisma } from "@/config/prisma";
 import { getServerSession } from "next-auth";
 import { IncomingMessage } from "http";
+import { NextApiRequest } from "next";
 
 export const POST = async (request: NextRequest) => {
   try {
@@ -76,7 +77,7 @@ export const POST = async (request: NextRequest) => {
 };
 
 
-export async function GET(req: IncomingMessage): Promise<NextResponse> {
+export async function GET(req: NextApiRequest): Promise<NextResponse> {
   try {
     const session = await getServerSession({ req });
 
