@@ -15,7 +15,7 @@ function GraphData() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  const patients = useSelector((state) => state.allPatients.patients);
+  const patients = useSelector((state:RootState) => state.allPatients.patients);
   const appointments = useSelector(
     (state:RootState) => state.getAppointments.appointments
   );

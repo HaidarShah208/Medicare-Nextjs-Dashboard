@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import instance from '@/utils/instance';
-import toast from 'react-hot-toast';
 import axios from 'axios';
 
 interface patietnsData{
@@ -8,7 +7,7 @@ id:string;
 }
 
 const initialState = {
-  patients: [] as patietnsData [],
+  patients: [] as patietnsData[],
   loading: false,
   error: null as null | string,
 };
