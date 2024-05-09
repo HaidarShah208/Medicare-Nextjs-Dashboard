@@ -61,7 +61,7 @@ export type patientInformation= {
 
 
 export type AppointmentData= {
-  id:string,
+  id?:string,
   dateCreated: string;
   room: string;
   patientsName: string;
@@ -80,10 +80,10 @@ export type errHandle={
   
   }
 
-export type   AppointmentTypes= {
+  export type   AppointmentTypes= {
+  id: string;
   patientsName: string;
   dateTime: string;
   duration: string;
   purpose: string;
-  id: string;
 }

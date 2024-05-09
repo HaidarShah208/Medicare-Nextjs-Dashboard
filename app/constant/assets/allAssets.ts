@@ -55,8 +55,6 @@ import Add from '../../assets/Add.svg'
 import Filter from '../../assets/Filter.svg'
 import SearchPatient from '../../assets/SearchPatient.svg'
 import Options from '../../assets/Options.svg'
-import Left from  '../../assets/left.svg'
-import Right from  '../../assets/right.svg'
 import Edit from  '../../assets/Edit.svg'
 import Delete from  '../../assets/Delete.svg'
 export const  PATIENTS = {
@@ -65,8 +63,6 @@ export const  PATIENTS = {
     Add:Add,
     Info:Info,
     Options:Options,
-    Left:Left,
-    Right:Right,
     Edit:Edit,
     Delete:Delete
 }
