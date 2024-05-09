@@ -96,7 +96,7 @@ const DemoComponent: React.FC<DemoComponentProps> = ({ onDateChange }: any) => {
 
   return (
     <div>
-      <DatePicker options={options} onChange={handleChange} classNames='w-[415px] ' show={show} setShow={handleClose} />
+      <DatePicker options={options as any} onChange={handleChange} classNames='w-[415px] ' show={show} setShow={handleClose} />
     </div>
   );
 };
