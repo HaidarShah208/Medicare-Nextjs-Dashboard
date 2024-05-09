@@ -3,8 +3,12 @@ import instance from '@/utils/instance';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
+interface patietnsData{
+id:string;
+}
+
 const initialState = {
-  patients: [],
+  patients: [] as patietnsData [],
   loading: false,
   error: null as null | string,
 };
@@ -25,7 +29,7 @@ export const fetchPatients = createAsyncThunk(
 
 export const deletePatients = createAsyncThunk(
   "patients/deletePatients",
-  async (id: string) => {
+  async (id: string,{ dispatch }) => {
     try {
       const response = await fetch("http://localhost:3000/api/patients", {
         method: "DELETE",
@@ -39,6 +43,7 @@ export const deletePatients = createAsyncThunk(
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
+      dispatch(fetchPatients(1));
       return id;
     } catch (error) {
       console.error("Error deleting patient:", error);

@@ -44,6 +44,7 @@ function AppointmentsTimeline() {
 
       await fetch("/api/appointments", requestOptions);
       toast.success("success Appointment SuccessFully Deleted");
+      dispatch(getAppointments() as any);
       setShowDetailsMap({});
     } catch (error) {
       toast.error("An error occurred while deleting the appointment");

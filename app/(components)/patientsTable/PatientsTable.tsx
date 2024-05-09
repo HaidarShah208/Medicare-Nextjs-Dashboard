@@ -51,7 +51,7 @@ export default function PatientsTable() {
     try {
       await dispatch(deletePatients(id) as any);
       toast.success("Patient deleted");
-      await fetchPatientsData(currentPage);
+      
     } catch (error) {
       console.error("Error deleting patient:", error);
       toast.error("Failed to delete patient");
@@ -80,6 +80,7 @@ export default function PatientsTable() {
           </div>
         ) : (
           <div className="relative overflow-x-auto h-screen">
+             {currentPatients && currentPatients.length > 0 ? (
             <table className="min-w-full divide-y bg-white">
               <thead className="border-b h-[65px] border-gray-200">
                 <tr>
@@ -173,6 +174,9 @@ export default function PatientsTable() {
                 ))}
               </tbody>
             </table>
+             ) : (
+              <p className="text-center mt-6">No patients available</p>
+            )}
             <div className="flex justify-end me-4 my-3">
               <Pagination
                 currentPage={currentPage}
