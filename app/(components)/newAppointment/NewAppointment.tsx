@@ -11,10 +11,11 @@ import FormButton from "../formButton/FormButton";
 import { FormData, Users } from "@/app/constant/allTypes/AllTypes";
 import { APPOITMENTS } from "@/app/constant/assets/allAssets";
 import { getSession } from "next-auth/react";
+import { getAppointments } from "@/store/slices/getAppoitments";
 
-function NewAppointment({ onClose,appointmentData }:any) {
+function NewAppointment({ onClose, appointmentData }: any) {
   const dispatch = useDispatch();
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const [showRoomSelector, setShowRoomSelector] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState("Room 1");
   const [user, setUser] = useState<Users | null>(null);
@@ -29,7 +30,6 @@ function NewAppointment({ onClose,appointmentData }:any) {
     room: "",
   });
 
-
   const handleChange = (key: string, value: string | number | boolean) => {
     setFormData({
       ...formData,
@@ -42,7 +42,6 @@ function NewAppointment({ onClose,appointmentData }:any) {
     setShowRoomSelector(false);
   };
 
- 
   useEffect(() => {
     const fetchUser = async () => {
       const userData = await getSession();
@@ -51,8 +50,12 @@ function NewAppointment({ onClose,appointmentData }:any) {
     fetchUser();
   }, []);
 
-useEffect(() => {
-    if ( appointmentData) {
+  useEffect(() => {
+    dispatch(getAppointments() as any);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (appointmentData) {
       setFormData({
         patientsName: appointmentData.patientsName,
         purpose: appointmentData.purpose,
@@ -64,7 +67,7 @@ useEffect(() => {
         room: appointmentData.room,
       });
     }
-  }, [ appointmentData]);
+  }, [appointmentData]);
 
   const handleSubmit = async () => {
     if (
@@ -79,7 +82,7 @@ useEffect(() => {
     }
 
     try {
-      setLoading(true)
+      setLoading(true);
       const requestData = {
         ...formData,
         dateCreated: new Date().toISOString(),
@@ -89,27 +92,29 @@ useEffect(() => {
         try {
           const myHeaders = new Headers();
           myHeaders.append("Content-Type", "application/json");
-  
+
           const raw = JSON.stringify({
             id: appointmentData.id,
-            ...requestData,  
+            ...requestData,
           });
-  
+
           const requestOptions = {
             method: "PUT",
             headers: myHeaders,
             body: raw,
           };
-  
+
           await fetch(`http://localhost:3000/api/appointments`, requestOptions);
+          dispatch(getAppointments() as any);
           toast.success("Successfully Updated");
         } catch (error) {
           console.log("error", error);
         }
       } else {
         await dispatch(postAppointment(requestData) as any);
+        dispatch(getAppointments() as any);
       }
-      
+
       console.log("Form Data:", formData);
       setLoading(false);
       onClose();
@@ -175,8 +180,7 @@ useEffect(() => {
                   <p className="text-base font-bold">
                     {dayjs(formData?.dateTime).format("HH:mm")}
                   </p>
-                  <p
-                    className={`text-sm cursor-pointer text-blue-600  pt-1`}>
+                  <p className={`text-sm cursor-pointer text-blue-600  pt-1`}>
                     change
                   </p>
                   <input
@@ -356,7 +360,11 @@ useEffect(() => {
             </div>
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-           <FormButton onClick={handleSubmit} text={appointmentData?'update':'save'} loading={loading}/>
+            <FormButton
+              onClick={handleSubmit}
+              text={appointmentData ? "update" : "save"}
+              loading={loading}
+            />
             <button
               onClick={handleSubmit}
               type="button"

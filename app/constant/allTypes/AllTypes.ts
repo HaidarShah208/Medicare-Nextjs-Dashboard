@@ -56,6 +56,7 @@ export type patientInformation= {
   patientsName: string;
   purpose: string;
   duration: string;
+  dateTime:string
 }
 
 
@@ -80,7 +81,7 @@ export type errHandle={
   }
 
 export type   AppointmentTypes= {
-  patientName: string;
+  patientsName: string;
   dateTime: string;
   duration: string;
   purpose: string;
