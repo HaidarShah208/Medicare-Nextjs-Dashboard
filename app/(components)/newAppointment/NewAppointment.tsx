@@ -1,8 +1,7 @@
 "use client";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import { textColor } from "@/app/(pages)/layout";
-import { postAppointment } from "@/store/slices/addAppoitments";
+ import { postAppointment } from "@/store/slices/addAppoitments";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,6 +11,7 @@ import { FormData, Users } from "@/app/constant/allTypes/AllTypes";
 import { APPOITMENTS } from "@/app/constant/assets/allAssets";
 import { getSession } from "next-auth/react";
 import { getAppointments } from "@/store/slices/getAppoitments";
+import { textColor } from "@/app/constant/color/Color";
 
 function NewAppointment({ onClose, appointmentData }: any) {
   const dispatch = useDispatch();

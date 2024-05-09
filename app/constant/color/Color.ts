@@ -2,6 +2,7 @@ export const COLORS={
     BgColor:'#E0E0E0'
 }
 
+export const textColor = "#2F80ED";
 
 
 export const GETSTATUSCOLOR = (status: string) => {

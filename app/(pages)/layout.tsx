@@ -10,7 +10,6 @@ export const inter = Mukta({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
-export const textColor = "[#2F80ED]";
 
 const metadata: Metadata = {
   title: "Medicare app",

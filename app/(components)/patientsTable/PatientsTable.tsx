@@ -63,8 +63,7 @@ export default function PatientsTable() {
   };
 
 
-  const handleEdit=( )=>{
-  }
+ 
   const indexOfLastPatient = currentPage * PatientsPerPage;
   const indexOfFirstPatient = indexOfLastPatient - PatientsPerPage;
   const currentPatients = patients.data?.slice(
