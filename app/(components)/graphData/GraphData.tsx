@@ -59,8 +59,8 @@ function GraphData() {
 
   return (
     <div>
-      <div className="flex">
-        <div className="w-[358px] h-[191px] bg-white">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className=" h-[191px] bg-white">
           <div className="flex justify-between px-4 pt-4">
             <p>Offline Consultations</p>
             <Image src={PATIENTS.Options} alt="optionssss" />
@@ -89,7 +89,7 @@ function GraphData() {
             )}
           </div>
         </div>
-        <div className="w-[358px] h-[191px] bg-white mx-2">
+        <div className=" h-[191px] bg-white ">
           <div className="flex justify-between px-4 pt-4">
             <p>Online Consultations</p>
             <Image src={PATIENTS.Options} alt="options" />
@@ -115,7 +115,7 @@ function GraphData() {
             )}
           </div>
         </div>
-        <div className="w-[358px] h-[191px] bg-white">
+        <div className=" h-[191px] bg-white">
           <div className="flex justify-between px-4 pt-4">
             <p>Total Paitents</p>
             <Image src={PATIENTS.Options} alt="options" />

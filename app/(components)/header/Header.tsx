@@ -44,18 +44,18 @@ function Header({ handleToggleSidebar }: HeaderProps) {
         <input
           type="text"
           placeholder="Search"
-          className=" border-none focus:border-transparent  focus:outline-none font-light bg-transparent p-1 h-[40px] w-auto sm:w-[580px]"
+          className=" border-none focus:border-transparent  focus:outline-none font-light bg-transparent p-1 h-[40px] w-auto flex-1 "
         />
-        <button type="submit" className="border-none ms-24 bg-transparent">
+        <button type="submit" className="border-none me-4 bg-transparent">
           <Image src={IMEGES.Search} alt={"logo"}  />
         </button>
       </form>
-      <div className="flex-col h-[50px] sm:w-[108px] sm:pt-0 pt-4 w-full me-3"><p className="text-end sm:text-[15px] text-[8px]">{user?.user.name}</p><p className="text-end sm:text-[15px] text-[7px]">General Doctor</p></div>
-      <div className="px-2 sm:text-[15px] text-[10px] h-[40px] border border-gray-400 rounded justify-center text-center pt-2 me-1 sm:me-3">{formatDate(currentDate)}</div>
+      <div className="flex-col h-[50px] sm:w-[108px] sm:pt-0 pt-4 w-full me-3"><p className="text-end sm:text-[15px] text-[6px]">{user?.user.name}</p><p className="text-end sm:text-[15px] text-[3px]">General Doctor</p></div>
+      <div className="px-2 sm:text-[15px] text-[10px] h-[40px] border border-gray-400 rounded justify-center text-center pt-2 me-1 sm:me-3 sm:block  hidden">{formatDate(currentDate)}</div>
       <div className="header_icons  flex items-center space-x-4">
-        <Image src={IMEGES.Email} className="sm:block hidden" alt={"logoiiii"} />
-        <Image src={IMEGES.Notification} className="sm:block hidden" alt={"logos"} />
-        <Image src={IMEGES.Logout} className="sm:block hidden cursor-pointer" alt={"logo"} onClick={handleLogout}/>
+        <Image src={IMEGES.Email} className="sm:block hidden " alt={"email"} />
+        <Image src={IMEGES.Notification} className="sm:block hidden " alt={"notification"} />
+        <Image src={IMEGES.Logout} className="sm:block hidden cursor-pointer" alt={"logout"} onClick={handleLogout}/>
       </div>
     </div>
   );

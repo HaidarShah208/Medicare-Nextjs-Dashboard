@@ -82,8 +82,8 @@ function AddPatient() {
   
   return (
     <div>
-      <div className="items-center flex flex-col">
-        <div className="h-[72px] w-[1090px] items-center bg-white flex flex-row justify-between px-7">
+      <div className="items-center ms-30 flex flex-col">
+        <div className="h-[72px] w-[1090px]  items-center bg-white flex flex-row justify-between px-7">
           <div className="jus">
             <p className="">Total Patients</p>
           </div>

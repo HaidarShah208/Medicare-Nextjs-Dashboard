@@ -2,6 +2,10 @@ import { DatepickerOptions } from '@/app/constant/allTypes/AllTypes';
 import React, { useState } from 'react';
 import DatePicker from 'tailwind-datepicker-react';
 
+interface DemoComponentProps {
+  onDateChange: (date: Date) => void;
+}
+
 const options: DatepickerOptions = {
   title: "Demo Title",
   autoHide: true,
@@ -40,7 +44,7 @@ const options: DatepickerOptions = {
   }
 };
 
-const DemoComponent: React.FC = ({onDateChange}:any) => {
+const DemoComponent:  React.FC<DemoComponentProps> = ({onDateChange}:any) => {
   const [show, setShow] = useState<boolean>(false);
   
   const handleChange = (selectedDate: Date) => {
