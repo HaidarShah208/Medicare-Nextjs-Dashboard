@@ -40,7 +40,7 @@ const options: DatepickerOptions = {
   inputDateFormatProp: {
     day: "numeric",
     month: "long",
-    year: "numeric"
+    year: "numeric" as "numeric" | "2-digit" // Ensure year is explicitly typed
   }
 };
 
@@ -57,7 +57,7 @@ const DemoComponent:  React.FC<DemoComponentProps> = ({onDateChange}:any) => {
 
   return (
     <div>
-      <DatePicker options={options} onChange={handleChange} classNames='w-[415px] mb-0' show={show} setShow={handleClose} />
+      <DatePicker options={options} onChange={handleChange} classNames='w-[415px]' show={show} setShow={handleClose} />
     </div>
   );
 };
