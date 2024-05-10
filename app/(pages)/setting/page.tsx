@@ -22,9 +22,9 @@ function Setting() {
           <Image src={DASHBOARD.Question} alt="question" />
         </div>
       </div>
-      <div>
-        <p className="text-gray-700 me-56 my-4">
-          <Link href={"/changePassword"}>change your password ?</Link>
+      <div className="bg-white h-[60px] flex mt-3 rounded ps-6 items-center">
+        <p className="text-gray-700 font-bold me-56 my-4 justify-center items-center">
+          <Link href={"/changePassword"}>Change your password ?</Link>
         </p>
       </div>
      <EditProfileForm/>

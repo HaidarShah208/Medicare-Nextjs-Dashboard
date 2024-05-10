@@ -35,7 +35,6 @@ export const POST = async (request: NextRequest) => {
           },
         });
   
-        console.log("Created user:",appointments  );
         return new NextResponse(
           JSON.stringify({ data: appointments, success: true }),
           {
@@ -43,11 +42,9 @@ export const POST = async (request: NextRequest) => {
           }
         );
       } catch (error) {
-        console.error("Error creating user:", error);
         return new NextResponse(JSON.stringify(error), { status: 400 });
       }
     } catch (error) {
-      console.error("Error parsing request:", error);
       return new NextResponse("Internal Server Error", {
         status: 500,
       });
@@ -67,7 +64,6 @@ export const POST = async (request: NextRequest) => {
         }
       );
     } catch (error) {
-      console.error("Error fetching appointments:", error);
       return new NextResponse(JSON.stringify(error), { status: 400 });
     }
   };
@@ -106,12 +102,10 @@ export const PUT = async (request: NextRequest) => {
       where: { id },
       data,
     });
-    console.log("Updated appointment information:", appointment);
     return new NextResponse(JSON.stringify({ data: appointment, success: true }), {
       status: 200,
     });
   } catch (error) {
-    console.error("Error during updating appointment:", error);
     return new NextResponse(JSON.stringify(error), { status: 400 });
   }
 };

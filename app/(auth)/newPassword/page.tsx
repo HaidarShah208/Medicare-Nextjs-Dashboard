@@ -16,7 +16,6 @@ export default function NewPassword() {
 
   useEffect(() => {
     const otpValue = localStorage.getItem("otpData");
-    console.log("🚀  useEffect  otpValue:", otpValue);
     if (otpValue !== null) {
       const parsedOtp = JSON.parse(otpValue);
       if (parsedOtp) {
@@ -45,7 +44,6 @@ export default function NewPassword() {
         })
       );
     } catch (error) {
-      console.error("Error changing password:", error);
       toast.error(`Error changing password: ${error}`);
     }
   };

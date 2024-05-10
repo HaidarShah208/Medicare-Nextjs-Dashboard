@@ -45,7 +45,7 @@ function Otp() {
           }
           router.push("/newPassword");
         } catch (error) {
-          console.error("Error occurred:", error);
+          toast.error(`Error changing password: ${error}`);
         }
     }
   return (

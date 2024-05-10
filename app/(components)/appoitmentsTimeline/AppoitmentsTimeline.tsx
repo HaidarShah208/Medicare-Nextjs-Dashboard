@@ -52,7 +52,6 @@ function AppointmentsTimeline() {
   };
   
   const handleEdit = (appointment: React.SetStateAction<AppointmentTypes | null>) => {
-    console.log("Editing appointment:", appointment);
     setEditAppointmentData(appointment);
     dispatch(getAppointments() as any);
     setShowDetailsMap({});

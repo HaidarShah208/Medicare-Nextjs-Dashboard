@@ -51,9 +51,8 @@ export default function ForgotPassword() {
         JSON.stringify({ email: formData.email, otp })
       );
       router.push("/otp");
-      console.log(res.data);
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error creating otp");
     }
   };
 
