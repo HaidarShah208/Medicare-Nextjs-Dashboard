@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import  { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
  import { postAppointment } from "@/store/slices/addAppoitments";
 import { useDispatch } from "react-redux";

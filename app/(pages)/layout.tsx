@@ -41,6 +41,8 @@ export default function RootLayout({
     }
   };
   return (
+    <html lang="en">
+    <body className={inter.className}>
         <div>
           <Header handleToggleSidebar={handleToggleSidebar} />
           <div>
@@ -57,5 +59,7 @@ export default function RootLayout({
             </main>
           </div>
         </div>
+        </body>
+    </html>
   );
 }

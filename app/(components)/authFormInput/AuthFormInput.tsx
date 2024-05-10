@@ -1,17 +1,19 @@
-import React from 'react';
+import { InputProps } from "@/app/constant/allTypes/AllTypes";
+import React from "react";
 
-interface InputProps {
-  label: string;
-  name: string;
-  type?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const AuthFormInput: React.FC<InputProps> = ({ label, name, type = 'text', value, onChange }) => {
+const AuthFormInput: React.FC<InputProps> = ({
+  label,
+  name,
+  type = "text",
+  value,
+  onChange,
+}) => {
   return (
     <div className="mb-6">
-      <label htmlFor={name} className="block text-gray-700 text-[16px] font-bold mb-2">
+      <label
+        htmlFor={name}
+        className="block text-gray-700 text-[16px] font-bold mb-2"
+      >
         {label}
       </label>
       <input

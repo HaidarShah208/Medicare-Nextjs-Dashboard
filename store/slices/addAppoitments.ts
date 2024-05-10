@@ -1,22 +1,19 @@
-import { AppointmentData, errHandle } from '@/app/constant/allTypes/AllTypes';
-import instance from '@/utils/instance';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { AppointmentData, errHandle } from "@/app/constant/allTypes/AllTypes";
+import instance from "@/utils/instance";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
-const initialState:errHandle = {
+const initialState: errHandle = {
   loading: false,
-  error:  null,
+  error: null,
 };
 
-
-
 export const postAppointment = createAsyncThunk(
-  'appointments/postAppointment',
+  "appointments/postAppointment",
   async (requestData: AppointmentData, { rejectWithValue }) => {
     try {
-      const response = await instance.post('appointments',requestData)
+      const response = await instance.post("appointments", requestData);
       if (response.status !== 200) {
-        throw new Error('Failed to submit appoitment');
+        throw new Error("Failed to submit appoitment");
       }
       const data = await response.data;
       return data;
@@ -26,11 +23,8 @@ export const postAppointment = createAsyncThunk(
   }
 );
 
-
-
-
 const appointmentSlice = createSlice({
-  name: 'appointments',
+  name: "appointments",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

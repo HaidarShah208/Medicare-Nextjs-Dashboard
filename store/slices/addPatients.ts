@@ -1,26 +1,20 @@
-import instance from '@/utils/instance';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { addPatients } from "@/app/constant/allTypes/AllTypes";
+import instance from "@/utils/instance";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-interface  addPatients {
-    loading: boolean;
-    error: any;  
-    userInfo: any;  
-  }
-
-const initialState:addPatients = {
+const initialState: addPatients = {
   loading: false,
   error: null,
   userInfo: null,
 };
 
 export const addPatient = createAsyncThunk(
-  'signup/addPatient',
-  async (requestData:any) => {
-    const response = await instance.post("patients",requestData)
-    
+  "signup/addPatient",
+  async (requestData: any) => {
+    const response = await instance.post("patients", requestData);
 
     if (response.status !== 200) {
-      throw new Error('Failed to submit data');
+      throw new Error("Failed to submit data");
     }
 
     const userInfo = await response.data;
@@ -29,7 +23,7 @@ export const addPatient = createAsyncThunk(
 );
 
 const signupSlice = createSlice({
-  name: 'signup',
+  name: "signup",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

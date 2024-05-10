@@ -1,17 +1,15 @@
-'use client'
-import { Change, Users } from '@/app/constant/allTypes/AllTypes';
-import { getSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast';
-import AuthFormButton from '../authFormButton/AuthFormButton';
-import AuthFormInput from '../authFormInput/AuthFormInput';
-
+"use client";
+import { Change, Users } from "@/app/constant/allTypes/AllTypes";
+import { getSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import AuthFormButton from "../authFormButton/AuthFormButton";
+import AuthFormInput from "../authFormInput/AuthFormInput";
 
 export default function ChangePasswordForm() {
-  
   const [user, setUser] = useState<Users | null>(null);
-  const [loading,setLoading]=useState(false)
- 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchUser = async () => {
       const userData = await getSession();
@@ -19,8 +17,8 @@ export default function ChangePasswordForm() {
     };
     fetchUser();
   }, []);
-  const currentUserEmail=user?.user.email
- const [formData, setFormData] = useState({
+  const currentUserEmail = user?.user.email;
+  const [formData, setFormData] = useState({
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -28,15 +26,15 @@ export default function ChangePasswordForm() {
 
   const handleChange = (e: Change) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {oldPassword,newPassword,confirmPassword}=formData
+    const { oldPassword, newPassword, confirmPassword } = formData;
     if (!oldPassword || !newPassword || !confirmPassword) {
       toast.error("Please fill in all fields.");
       return;
@@ -47,7 +45,7 @@ export default function ChangePasswordForm() {
     }
 
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch("/api/changePassword", {
         method: "PUT",
         headers: {
@@ -63,8 +61,8 @@ export default function ChangePasswordForm() {
         throw new Error("Failed to change password.");
       }
       console.log("Password changed successfully.");
-      setLoading(false)
-      toast.success("Password changed successfully")
+      setLoading(false);
+      toast.success("Password changed successfully");
       window.history.back();
     } catch (error) {
       console.error("Error changing password:", error);
@@ -74,21 +72,21 @@ export default function ChangePasswordForm() {
 
   return (
     <form className="w-full max-w-sm mt-7" onSubmit={handleSubmit}>
-        <AuthFormInput
+      <AuthFormInput
         label="Old Password"
         name="oldPassword"
         type="password"
         value={formData.oldPassword}
         onChange={handleChange}
       />
-       <AuthFormInput
+      <AuthFormInput
         label="New Password"
         name="newPassword"
         type="password"
         value={formData.newPassword}
         onChange={handleChange}
       />
-       <AuthFormInput
+      <AuthFormInput
         label="Confirm Password"
         name="confirmPassword"
         type="password"
@@ -96,8 +94,8 @@ export default function ChangePasswordForm() {
         onChange={handleChange}
       />
       <div className="mb-6">
-        <AuthFormButton isLoading={loading}/>
+        <AuthFormButton isLoading={loading} />
       </div>
     </form>
-  )
+  );
 }

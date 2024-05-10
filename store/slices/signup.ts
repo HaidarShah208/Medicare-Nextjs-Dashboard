@@ -1,38 +1,31 @@
-import { FormTypes } from '@/app/constant/allTypes/AllTypes';
-import instance from '@/utils/instance';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { FormTypes, signup } from "@/app/constant/allTypes/AllTypes";
+import instance from "@/utils/instance";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-interface   signup {
-  loading: boolean;
-  error: any;  
-}
-
-
-
-const initialState:signup = {
-loading: false,
-error: null,
+const initialState: signup = {
+  loading: false,
+  error: null,
 };
 
 export const signupUser = createAsyncThunk(
-  'signup/signupUser',
-  async (formData:FormTypes) => {
+  "signup/signupUser",
+  async (formData: FormTypes) => {
     try {
       const response = await instance.post("signup", formData);
 
       if (response.status !== 200) {
-        throw new Error('Sign up failed');
+        throw new Error("Sign up failed");
       }
 
       return response.data;
     } catch (error) {
-      throw new Error('Error in signup request');
+      throw new Error("Error in signup request");
     }
   }
 );
 const apiSlice = createSlice({
-  name: 'signup',
-  initialState ,
+  name: "signup",
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

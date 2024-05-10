@@ -7,8 +7,6 @@ import { SCHEDUALE } from '@/app/constant/assets/allAssets';
 
 const localizer = momentLocalizer(moment);
 
- 
-
 const CalendarChart = ({appointments}:any) => {
   const events = appointments.map((appointment: { dateTime: string | number | Date; duration: moment.DurationInputArg1; }) => ({
     title: 'pending',

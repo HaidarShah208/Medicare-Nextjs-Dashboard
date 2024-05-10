@@ -3,7 +3,6 @@ import { signupUser } from '@/store/slices/signup';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import Loader from '../loader/Loader';
 import AuthFormButton from '../authFormButton/AuthFormButton';
 import AuthFormInput from '../authFormInput/AuthFormInput';
 

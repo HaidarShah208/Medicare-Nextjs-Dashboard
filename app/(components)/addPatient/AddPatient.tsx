@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import DemoComponent from "../datePicker/DatePicker";
-import Loader from "../loader/Loader";
 import FormButton from "../formButton/FormButton";
 
 function AddPatient() {

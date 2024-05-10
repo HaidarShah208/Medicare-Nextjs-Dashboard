@@ -2,12 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
- 
-
-interface DonutChartProps {
-  maleCount: number;
-  femaleCount: number;
-}
+import { DonutChartProps } from "@/app/constant/allTypes/AllTypes";
 
 const PieChart: React.FC<DonutChartProps> = ({ maleCount, femaleCount }) => {
   const chartRef = useRef<HTMLDivElement>(null);
@@ -32,12 +27,12 @@ const PieChart: React.FC<DonutChartProps> = ({ maleCount, femaleCount }) => {
                 total: {
                   show: true,
                   showAlways: true,
-                  label: 'Patients',
+                  label: "Patients",
                   formatter: function (w: any) {
                     return w.globals.seriesTotals.reduce((a: any, b: any) => {
-                      return a + b
-                    }, 0)
-                  }
+                      return a + b;
+                    }, 0);
+                  },
                 },
               },
             },
