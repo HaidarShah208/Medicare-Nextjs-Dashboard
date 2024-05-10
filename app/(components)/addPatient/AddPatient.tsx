@@ -47,7 +47,6 @@ function AddPatient() {
   const handleSubmit = async () => {
     const { forename, surname, dob, sex, diagnoses, notes, phoneNumber,status } =
       formData;
-    console.log("Form Data:", formData);
     const formattedDate = `${dob.getFullYear()}-${(dob.getMonth() + 1)
       .toString()
       .padStart(2, "0")}-${dob.getDate().toString().padStart(2, "0")}`;
@@ -71,7 +70,6 @@ function AddPatient() {
     router.push("/patients");
     } catch (error) {
       toast.error("Error in adding patient");
-      console.error("Error submitting data:", error);
     }
   };
 

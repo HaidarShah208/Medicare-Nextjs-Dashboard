@@ -28,7 +28,7 @@ export default function EditProfileForm() {
           const userData = await response.json();
           setUserData(userData);
         } else {
-          console.error("Failed to fetch user data");
+          toast.error("Failed to fetch user data");
         }
       }
     };
@@ -87,10 +87,10 @@ export default function EditProfileForm() {
           employees: editedData.employees,
         }));
       } else {
-        console.error("Failed to update user profile");
+        toast.error("Failed to update user profile")
       }
     } catch (error) {
-      console.error("Error updating user profile:", error);
+      toast.error("Failed to update user profile")
     }
   };
 

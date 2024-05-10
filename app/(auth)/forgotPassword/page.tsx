@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 export default function ForgotPassword() {
   const router = useRouter();
-  const { loading, error } = useSelector((state:any) => state.forgotPassword); 
+  const { loading } = useSelector((state:any) => state.forgotPassword); 
   const [formData, setFormData] = useState({
     email: '',
   });

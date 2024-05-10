@@ -11,6 +11,7 @@ import OfflineChart from "../offlineAreaChart/OfflineAreaChart";
 import OnlineChart from "../onlineAreaChart/OnlineAreaChart";
 import { RootState } from "@/store/store";
 import PieChart from "../pieChart/PieChart";
+import toast from "react-hot-toast";
 function GraphData() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -27,7 +28,7 @@ function GraphData() {
         await dispatch(getAppointments() as any);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        toast.error("Error during fetching data:");
       }
     };
 

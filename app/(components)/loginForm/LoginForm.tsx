@@ -28,7 +28,6 @@ function LoginForm() {
         ...formData,
         redirect: false,
       });
-      console.log("signIn response:", user);
 
       if (user && user.ok) {
         toast.success("You Are successfully Login");
@@ -42,7 +41,6 @@ function LoginForm() {
       }
       setIsLoading(false);
     } catch (error) {
-      console.log("Error:", error);
       toast.error("An error occurred while logging in");
     }
   };

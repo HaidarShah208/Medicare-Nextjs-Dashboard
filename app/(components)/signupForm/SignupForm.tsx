@@ -27,7 +27,6 @@ function SignupForm() {
   
     const handleSubmit = async(e: any) => {
       e.preventDefault();
-      console.log(formData);
       if (!formData.email || !formData.password || !formData.userName || !formData.companyName || !formData.confirmPassword|| !formData.employees || !formData.industryName) {
         toast.error("Please enter all fields");
         return;
@@ -41,7 +40,6 @@ function SignupForm() {
       setLoading(false);
       } catch (error) {
           toast.error("Error in registration"); 
-        console.error("Signup failed:", error);
 
       }
     };

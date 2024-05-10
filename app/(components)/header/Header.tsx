@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IMEGES } from "@/app/constant/assets/allAssets";
 import Image from "next/image";
 import { getSession, signOut } from "next-auth/react";
-import { Users } from "@/app/constant/allTypes/AllTypes";
-
-
-interface HeaderProps {
-  handleToggleSidebar: () => void; 
-}
+import { HeaderProps, Users } from "@/app/constant/allTypes/AllTypes";
 
 function Header({ handleToggleSidebar }: HeaderProps) {
   const [user, setUser] = useState<Users | null>(null);

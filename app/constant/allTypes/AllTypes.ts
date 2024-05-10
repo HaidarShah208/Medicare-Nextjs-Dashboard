@@ -150,3 +150,8 @@ export type ForgotPasswordState= {
   loading: boolean;
   error: string | null;
 }
+
+
+export type HeaderProps= {
+  handleToggleSidebar: () => void; 
+}

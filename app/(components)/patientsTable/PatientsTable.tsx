@@ -39,13 +39,11 @@ export default function PatientsTable() {
     try {
       await dispatch(fetchPatients(page) as any);
     } catch (error) {
-      console.error("Error fetching patients:", error);
 
       toast.error("Failed to fetch patients");
     }
   };
 
-  console.log("fetch patient", fetchPatientsData);
 
   const handleDelete = async (id: string) => {
     try {
@@ -53,7 +51,6 @@ export default function PatientsTable() {
       toast.success("Patient deleted");
       
     } catch (error) {
-      console.error("Error deleting patient:", error);
       toast.error("Failed to delete patient");
     }
   };

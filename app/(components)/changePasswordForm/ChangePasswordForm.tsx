@@ -60,12 +60,10 @@ export default function ChangePasswordForm() {
       if (!response.ok) {
         throw new Error("Failed to change password.");
       }
-      console.log("Password changed successfully.");
       setLoading(false);
       toast.success("Password changed successfully");
       window.history.back();
     } catch (error) {
-      console.error("Error changing password:", error);
       toast.error("Failed to change password. Please try again later.");
     }
   };

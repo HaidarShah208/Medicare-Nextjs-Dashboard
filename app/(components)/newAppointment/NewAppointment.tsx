@@ -108,18 +108,17 @@ function NewAppointment({ onClose, appointmentData }: any) {
           dispatch(getAppointments() as any);
           toast.success("Successfully Updated");
         } catch (error) {
-          console.log("error", error);
+toast.error("Error occure during updating")
         }
       } else {
         await dispatch(postAppointment(requestData) as any);
         dispatch(getAppointments() as any);
       }
 
-      console.log("Form Data:", formData);
       setLoading(false);
       onClose();
     } catch (error) {
-      console.error("Error submitting appointment:", error);
+      toast.error("Error submitting appointment");
     }
   };
 
