@@ -28,7 +28,10 @@ function SignupForm() {
     const handleSubmit = async(e: any) => {
       e.preventDefault();
       console.log(formData);
-  
+      if (!formData.email || !formData.password || !formData.userName || !formData.companyName || !formData.confirmPassword|| !formData.employees || !formData.industryName) {
+        toast.error("Please enter all fields");
+        return;
+      }
       try {
         setLoading(true);
        await dispatch(signupUser(formData) as any);
