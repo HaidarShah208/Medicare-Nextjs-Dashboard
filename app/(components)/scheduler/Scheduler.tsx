@@ -18,7 +18,7 @@ const {closeModal,openModal,isModalOpen,appointments }=useSchedule()
            <Image src={PATIENTS.Add} alt='add' className='sm:me-2 me-1 cursor-pointer' onClick={openModal}/>
            <Image src={PATIENTS.Filter} alt='Filter' />
            <Image src={SCHEDUALE.Print} alt='print' className='sm:mx-2 mx-1'/>
-           <Image src={PATIENTS.Info} alt='Info'/>
+           <Image src={PATIENTS.Info} alt='Infoicon'/>
          </div>
        </div>
        {isModalOpen && <NewAppointment onClose={closeModal} />}  
