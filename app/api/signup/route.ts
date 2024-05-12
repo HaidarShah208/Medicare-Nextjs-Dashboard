@@ -77,7 +77,7 @@ export const POST = async (request: NextRequest) => {
 
 export async function GET(req: NextRequest ): Promise<NextResponse> {
   try {
-    const session = await getServerSession({ req });
+    const session = await getServerSession();
 
     console.log("session", session);
 

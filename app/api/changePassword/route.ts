@@ -8,6 +8,10 @@ export const PUT = async (request: NextRequest) => {
       const userLogin = await prisma.users.findUnique({
         where: { email },
       });
+      if (userLogin === null) {
+        return new NextResponse(JSON.stringify(Error), { status: 400 });
+      }
+      
       const passwordMatch = await bcrypt.compare(oldPassword, userLogin.password);
       if (!passwordMatch) {
         return new NextResponse(JSON.stringify(Error), { status: 400 });

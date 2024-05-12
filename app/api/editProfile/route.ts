@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function PUT(req: Request): Promise<Response> {
     try {
-      const session = await getServerSession({ req });
+      const session = await getServerSession();
   
       if (!session || !session.user?.email) {
         return new NextResponse("Unauthorized", { status: 401 });

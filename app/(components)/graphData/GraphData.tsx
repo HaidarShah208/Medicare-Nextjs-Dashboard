@@ -12,11 +12,12 @@ import OnlineChart from "../onlineAreaChart/OnlineAreaChart";
 import { RootState } from "@/store/store";
 import PieChart from "../pieChart/PieChart";
 import toast from "react-hot-toast";
+
 function GraphData() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  const patients = useSelector((state) => state.allPatients.patients);
+  const patients = useSelector((state:any) => state.allPatients.patients);
   const appointments = useSelector(
     (state:RootState) => state.getAppointments.appointments
   );

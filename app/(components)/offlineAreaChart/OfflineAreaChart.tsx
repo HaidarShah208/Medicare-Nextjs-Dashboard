@@ -32,16 +32,17 @@ const OfflineChart: React.FC<{}> = () => {
   );
 
   const countAppointmentsByDay = (appointments: AppointmentDataType[]) => {
-    const appointmentCounts = appointments.reduce((acc, appointment) => {
+    const appointmentCounts: { [key: string]: number } = {};
+    appointments.forEach(appointment => {
       const date = new Date(appointment.dateTime).toLocaleDateString();
-      acc[date] = (acc[date]  || 0) + 1;
-      return acc;
-    }, {});
+      appointmentCounts[date] = (appointmentCounts[date] || 0) + 1;
+    });
     return Object.entries(appointmentCounts).map(([date, count]) => ({
-      x: date,
+      x: new Date(date),
       y: count,
     }));
   };
+  
 
   const offlineChartData = countAppointmentsByDay(filteredAppointments);
 

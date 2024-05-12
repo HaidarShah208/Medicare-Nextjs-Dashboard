@@ -6,7 +6,7 @@ import { patietnsData } from '@/app/constant/allTypes/AllTypes';
 
 
 const initialState = {
-  patients: [] as patietnsData [],
+  patients: [] as patietnsData[],
   loading: false,
   error: null as null | string,
 };

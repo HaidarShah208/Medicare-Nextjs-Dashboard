@@ -23,7 +23,7 @@ export default function PatientsTable() {
   const [showMenu, setShowMenu] = useState<string | null>(null);
 
   const patients = useSelector(
-    (state: RootState) => state.allPatients.patients
+    (state: any) => state.allPatients.patients
   );
   const loading = useSelector((state: RootState) => state.allPatients.loading);
   

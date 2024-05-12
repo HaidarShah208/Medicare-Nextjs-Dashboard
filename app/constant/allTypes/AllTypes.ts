@@ -133,6 +133,7 @@ export type AppointmentDataType = {
 
 export type patietnsData = {
   id: string;
+  data: any[];
 };
 
 export type signup = {
