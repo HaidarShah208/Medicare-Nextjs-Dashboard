@@ -1,8 +1,9 @@
 "use client"
-import Dashboard from './(pages)/dashboard/page'
 import { useEffect, useState } from 'react'
 import Header from './(components)/header/Header'
 import Sidebar from './(components)/sidebar/Sidebar'
+import dynamic from 'next/dynamic'
+const DashboardPage = dynamic(() => import('./(pages)/dashboard/page'),{ ssr: false,loading: () => <p>Loading...</p> })
 
 export default function Page() {
   const [sidebar, setSidebar] = useState<boolean>(true);  
@@ -30,11 +31,13 @@ export default function Page() {
       <div>
         <Sidebar sidebar={!isSmallScreen || sidebar} handleToggleSidebar={handleToggleSidebar} />
         <main className={` ${isSmallScreen && !sidebar ? 'ml-2' : 'sm:ml-64 ml-35'}`}>
-      <Dashboard/>
+ 
+  
+   <DashboardPage/>
+ 
       </main>
       </div>
     </div>
-    {/* <Signup/> */}
     </>
   )
 }

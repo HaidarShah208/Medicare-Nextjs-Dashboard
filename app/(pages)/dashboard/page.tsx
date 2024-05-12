@@ -1,25 +1,20 @@
-import React from "react";
-import Image from "next/image";
-import { DASHBOARD, PATIENTS } from "@/app/constant/assets/allAssets";
-import AppoitmentsTimeline from "@/app/(components)/appoitmentsTimeline/AppoitmentsTimeline";
-import GraphData from "@/app/(components)/graphData/GraphData";
-import AppoitmentTiemlineHeader from "@/app/(components)/appoitmentTiemlineHeader/AppoitmentTiemlineHeader";
-import ToastNotification from "@/app/(components)/appoitmentNotification/AppoitmentNotification";
-
-export default function Dashboard() {
-
+'use client'
+import dynamic from 'next/dynamic'
+import { useEffect } from 'react'
+ 
+const Dashboard = dynamic(() => import('@/app/(components)/dashboard/Dashboard'),{ ssr: false,loading: () => <p>Loading...</p> })
+ 
+export default function DashboardPage() {
+ useEffect(()=>{
+  if (typeof window !== "undefined") {
+    window.console.log("window.alert from client component");
+  }
+  
+ },[])
+  
   return (
-    <>
-      <p className="text-lg py-3 ps-2">Dashboard &gt; Summary</p>
-   <GraphData/>
-      <div className="flex">
-     
-        <div className="w-full mt-3 ms-1 px-4  py-2 bg-white">
-          <AppoitmentTiemlineHeader/>
-         <AppoitmentsTimeline/>
-        </div>
-      </div>
-      <ToastNotification />
-    </>
-  );
+    <div>
+<Dashboard/>
+    </div>
+  )
 }
