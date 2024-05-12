@@ -40,7 +40,7 @@ const options: DatepickerOptions = {
   inputDateFormatProp: {
     day: "numeric",
     month: "long",
-    year: "numeric" as "numeric" | "2-digit" 
+    year: "numeric"
   }
 };
 

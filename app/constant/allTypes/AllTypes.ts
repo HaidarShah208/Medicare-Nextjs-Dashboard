@@ -119,9 +119,9 @@ export type DatepickerOptions = {
   inputIdProp: string;
   inputPlaceholderProp: string;
   inputDateFormatProp: {
-    day: string;
-    month: string;
-    year: string;
+    day: "numeric",
+    month: "long",
+    year: "numeric"
   };
 };
 
