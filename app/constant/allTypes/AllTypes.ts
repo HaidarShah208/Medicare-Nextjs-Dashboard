@@ -156,3 +156,10 @@ export type ForgotPasswordState= {
 export type HeaderProps= {
   handleToggleSidebar: () => void; 
 }
+
+
+export type SidebarProps ={
+  sidebar: boolean;
+  handleToggleSidebar: () => void; 
+  
+}

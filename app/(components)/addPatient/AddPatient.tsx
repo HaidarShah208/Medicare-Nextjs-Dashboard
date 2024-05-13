@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import DemoComponent from "../datePicker/DatePicker";
 import FormButton from "../formButton/FormButton";
+import { Change } from "@/app/constant/allTypes/AllTypes";
 
 function AddPatient() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function AddPatient() {
     status:""
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: Change) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -30,14 +31,14 @@ function AddPatient() {
     });
   };
 
-  const handleDateChange = (date: any) => {
+  const handleDateChange = (date: Date) => {
     setFormData({
       ...formData,
       dob: date,
     });
   };
 
-  const handleSexChange = (sex: any) => {
+  const handleSexChange = (sex: string) => {
     setFormData({
       ...formData,
       sex: sex,

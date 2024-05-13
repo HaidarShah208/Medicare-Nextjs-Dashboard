@@ -1,4 +1,5 @@
 "use client";
+import { Change } from "@/app/constant/allTypes/AllTypes";
 import { IMEGES } from "@/app/constant/assets/allAssets";
 import { forgotPassword } from "@/store/slices/forgotPassword";
 import { useAppDispatch } from "@/store/useHookStore";
@@ -8,12 +9,10 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function NewPassword() {
-  const router = useRouter();
+  const router=useRouter()
   const [otp, setOtp] = useState({ email: "", otp: "" });
-  const [formData, setFormData] = useState({
-  newPassword: "",
-  });
-
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   useEffect(() => {
     const otpValue = localStorage.getItem("otpData");
     if (otpValue !== null) {
@@ -23,26 +22,35 @@ export default function NewPassword() {
       }
     }
   }, []);
-  const handleInputChange = (e: any) => {
+  const handleChange = (e: Change) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "newPassword") setNewPassword(value);
+    else if (name === "confirmPassword") setConfirmPassword(value);
   };
 
   const dispatch = useAppDispatch();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.newPassword) {
+    if (!newPassword || !confirmPassword) {
       toast.error("Please enter password.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast.error("New and confirm password don't match");
       return;
     }
     try {
       dispatch(
         forgotPassword({
           email: otp.email,
-          newPassword:formData.newPassword,
+          newPassword:newPassword,
         })
       );
+      toast.success("Password changed successfully");
+      router.push("/login");
     } catch (error) {
       toast.error(`Error changing password: ${error}`);
     }
@@ -61,13 +69,28 @@ export default function NewPassword() {
                 Your password
               </label>
               <input
-                type="number"
+                type="password"
                 name="newPassword"
                 id="newPassword"
-                value={formData.newPassword}
-                onChange={handleInputChange}
+                value={newPassword}
+                onChange={handleChange}
                 className="appearance-none border-b-2 border-gray-300 w-full py-2 px-3 bg-[#F7F7F7] text-gray-700 leading-tight focus:outline-none focus:border-gray-800"
-                placeholder="Enter your email"
+                placeholder="Enter your new password..."
+              />
+                  <label
+                htmlFor="email"
+                className="block text-gray-700 text-[16px] font-bold mb-2 mt-4"
+              >
+                Confirm password
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={handleChange}
+                className="appearance-none border-b-2 border-gray-300 w-full py-2 px-3 bg-[#F7F7F7] text-gray-700 leading-tight focus:outline-none focus:border-gray-800"
+                placeholder="Enter your confirm password..."
               />
             </div>
             <div className="mb-6">

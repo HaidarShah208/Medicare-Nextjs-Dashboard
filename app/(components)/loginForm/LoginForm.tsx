@@ -16,7 +16,7 @@ function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e: Change) =>
     setFormData((s) => ({ ...s, [e.target.name]: e.target.value }));
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!formData.email || !formData.password) {
       toast.error("Please enter email and password.");

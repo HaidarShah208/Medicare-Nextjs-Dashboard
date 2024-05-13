@@ -1,5 +1,6 @@
 'use client'
 import Loader from '@/app/(components)/loader/Loader';
+import { Change } from '@/app/constant/allTypes/AllTypes';
 import { IMEGES } from '@/app/constant/assets/allAssets'
 import axios from 'axios';
 import Image from 'next/image'
@@ -16,12 +17,12 @@ export default function ForgotPassword() {
   });
 
   const otp = Math.floor(100000 + Math.random() * 900000);
-  const handleInputChange = (e:any) => {
+  const handleInputChange = (e:Change) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.email) {
       toast.error("Please enter email.");

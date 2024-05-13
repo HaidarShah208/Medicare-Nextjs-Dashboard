@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import AuthFormButton from '../authFormButton/AuthFormButton';
 import AuthFormInput from '../authFormInput/AuthFormInput';
+import { Change } from '@/app/constant/allTypes/AllTypes';
 
 
 function SignupForm() {
@@ -20,12 +21,12 @@ function SignupForm() {
       confirmPassword: "",
     });
   
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: Change) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
     };
   
-    const handleSubmit = async(e: any) => {
+    const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!formData.email || !formData.password || !formData.userName || !formData.companyName || !formData.confirmPassword|| !formData.employees || !formData.industryName) {
         toast.error("Please enter all fields");

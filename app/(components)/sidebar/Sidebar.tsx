@@ -1,15 +1,10 @@
+import { SidebarProps } from '@/app/constant/allTypes/AllTypes';
 import { IMEGES, SIDEBAR } from '@/app/constant/assets/allAssets'
 import { signOut } from 'next-auth/react';
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
-
-interface SidebarProps {
-    sidebar: boolean;
-    handleToggleSidebar: () => void; 
-    
-  }
 function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
   const [selectedItem, setSelectedItem] =  useState<string>('Dashboard')
 
@@ -54,32 +49,32 @@ function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
    <Link href="/dashboard">
    <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Dashboard' && 'text-[#0000AC] border-s-4 border-[#0000AC]'}`} onClick={() => handleItemClick('Dashboard')}>
           <Image src={selectedItem === 'Dashboard' ? SIDEBAR.DashboardFocus : SIDEBAR.Dashboard} alt={'Dashboard'} />
-          <span className="ml-4 font-medium hidden sm:block">Dashboard</span>
+          <span className="ml-4 font-bold hidden sm:block">Dashboard</span>
         </li>
       </Link>
       <Link href="/schedule">
         <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Schedule' && 'text-[#0000AC] border-s-4  border-[#0000AC]'}`} onClick={() => handleItemClick('Schedule')}>
           <Image src={selectedItem === 'Schedule' ? SIDEBAR.SchedualeFocus : SIDEBAR.Calender} alt={'Calender'} />
-          <span className="ml-4 font-medium hidden sm:block">Schedule</span>
+          <span className="ml-4 font-bold hidden sm:block">Schedule</span>
         </li>
     </Link>
       <li className="flex items-center py-3 px-6 cursor-pointer">
       <Image src={SIDEBAR.Task} alt={'Task'}/>
-        <span className="ml-4 font-medium hidden sm:block">Task</span>
+        <span className="ml-4 font-bold hidden sm:block">Task</span>
       </li>
    <Link href="/patients">
    <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Patients' && 'text-[#0000AC] border-s-4  border-[#0000AC]'}`} onClick={() => handleItemClick('Patients')}>
           <Image src={selectedItem === 'Patients' ? SIDEBAR.PetientFocus : SIDEBAR.Petient} alt={'Patients'} />
-          <span className="ml-4 font-medium hidden sm:block">Patients</span>
+          <span className="ml-4 font-bold hidden sm:block">Patients</span>
         </li>
    </Link>
       <li className="flex items-center py-3 px-6 cursor-pointer">
       <Image src={SIDEBAR.Message} alt={'Message'}/>
-        <span className="ml-4 font-medium hidden sm:block">Message</span>
+        <span className="ml-4 font-bold hidden sm:block">Message</span>
       </li>
       <li className="flex items-center py-3 px-6 cursor-pointer">
       <Image src={SIDEBAR.Analytics} alt={'Message'}/>
-        <span className="ml-4 font-medium hidden sm:block">Analytics</span>
+        <span className="ml-4 font-bold hidden sm:block">Analytics</span>
       </li>
       <div className="flex justify-center">
     <hr className="border-t  my-3 w-[168px]" />
@@ -88,12 +83,12 @@ function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
    <Link href="/setting">
    <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Setting' && 'text-[#0000AC] border-s-4  border-[#0000AC]'}`} onClick={() => handleItemClick('Setting')}>
           <Image src={selectedItem === 'Setting' ? SIDEBAR.SettingFocus : SIDEBAR.Setting} alt={'Setting'} />
-          <span className="ml-4 font-medium hidden sm:block">Setting</span>
+          <span className="ml-4 font-bold hidden sm:block">Setting</span>
         </li>
    </Link>
       <li className="flex items-center py-3 px-6 cursor-pointer">
       <Image src={SIDEBAR.Support} alt={'Setting'}/>
-        <span className="ml-4 font-medium hidden sm:block">Support</span>
+        <span className="ml-4 font-bold hidden sm:block">Support</span>
       </li>
       <li className="flex items-center py-3 px-6 cursor-pointer" onClick={handleLogout}>
       <Image src={IMEGES.Logout} className='sm:hidden block' alt={'logout'}/>
