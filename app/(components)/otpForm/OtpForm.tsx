@@ -23,7 +23,6 @@ export default function OtpForm() {
         }
       }
     }, []);
-    console.log(otp)
     const handleSubmit = async (e: any) => {
       e.preventDefault();
       if (!formData.otp) {
