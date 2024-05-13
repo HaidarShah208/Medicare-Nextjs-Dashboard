@@ -34,14 +34,13 @@ export default function OtpForm() {
           toast.error("OTP Expired");
           return;
         }
-  
         const matchOtp = otp.otp == formData.otp;
-        toast.success('Otp Matched')
         if (!matchOtp) {
           toast.error("OTP not matched");
           return;
         }
         router.push("/newPassword");
+        toast.success('Otp Matched')
       } catch (error) {
         toast.error(`Error changing password: ${error}`);
       }
