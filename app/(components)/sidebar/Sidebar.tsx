@@ -64,7 +64,7 @@ function Sidebar({sidebar, handleToggleSidebar}:SidebarProps) {
       </li>
    <Link href="/patients">
    <li className={`flex items-center py-3 px-6 cursor-pointer ${selectedItem === 'Patients' && 'text-[#0000AC] border-s-4  border-[#0000AC]'}`} onClick={() => handleItemClick('Patients')}>
-          <Image src={selectedItem === 'Patients' ? SIDEBAR.PetientFocus : SIDEBAR.Petient} alt={'Patients'} />
+          <Image src={selectedItem === 'Patients' ? SIDEBAR.PetientFocus : SIDEBAR.Petient} alt={'Patient'} />
           <span className="ml-4 font-bold hidden sm:block">Patients</span>
         </li>
    </Link>
