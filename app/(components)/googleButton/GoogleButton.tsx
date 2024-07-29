@@ -14,7 +14,7 @@ function GoogleButton() {
                 className="absolute left-0 w-5"
                 alt="google logo"
               />
-              <span className="block w-max font-semibold tracking-wide text-gray-700 dark:text-white text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">
+              <span className="block w-max  font-semibold tracking-wide text-gray-700  text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">
                 Continue with Google
               </span>
             </div>

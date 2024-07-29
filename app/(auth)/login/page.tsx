@@ -14,14 +14,14 @@ export default function Login() {
           <p className={`text-[22px]`}>Tell us about your company</p>
           <LoginForm />
         </div>
-        <p className="text-gray-700 text-end text-sm ps-1 me-48">
+        <div className="text-gray-700 text-end text-sm ps-1 me-48">
           <div className="flex">
             <p className="me-1 text-gray-700">already have an account?</p>
             <Link href="/signup" className="text-[#0000AC] font-bold">
               Sign up
             </Link>
           </div>
-        </p>
+        </div>
         <div className="flex items-center w-full max-w-sm mb-4 mt-5">
           <div className="flex-grow border-t border-[#101014] mr-4"></div>
           <p className="font-bold text-[#0000AC]">or</p>
